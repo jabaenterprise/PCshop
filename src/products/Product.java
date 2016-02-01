@@ -10,10 +10,15 @@ public abstract class Product {
 	private boolean isAvailable;
 	private Type type; //See the enum file!
 	
+
+	
 	//Constructor:
 	
 	
 	//Getters: - only the one needed!
+	public double getPrice() {
+		return price;
+	}
 	
 	//Setters: - only the one needed!
 	

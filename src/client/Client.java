@@ -1,6 +1,7 @@
 package client;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import products.Product;
 
@@ -43,18 +44,44 @@ public class Client {
 	
 	
 	//Setters: - only the one we need!
-	
+
 	
 	//Methods:
 	  //CART-wise:
-		//addProductToCart(Product p, int quantity)
-		//removeProductFromCart(Product p)
+	public	void addProductToCart(Product p, int quantity){
+		if(cart.containsKey(p)){
+			cart.put(p, cart.get(p)+quantity);
+		}
+		else
+			cart.put(p, quantity);
+	}
+
+
+	public void removeProductFromCart(Product p){
+		if(cart.containsKey(p))
+			cart.remove(p);
+	}
+	
 	
 	
 	  //SHOP-wise:
 		//buyProductsInCart() - the amounts of products in shop drop and the money of the client too
-		//he uses the shop methods by calling the getShop() method and applying the Shop methods on it - searches for products, etc.
+		public void buyProductsInCart(){
+			double cost = 0;
+			for(Map.Entry<Product, Integer> entry:cart.entrySet()){
+				cost += entry.getKey().getPrice()*entry.getValue();
+			}
+			//printing total cost and confirming the buy
+			
+			this.money-=cost;
+			for(Map.Entry<Product, Integer> entry:cart.entrySet()){
+				cost += entry.getKey().getPrice()*entry.getValue();
+			}
+			
+		}
 	
+		//he uses the shop methods by calling the getShop() method and applying the Shop methods on it - searches for products, etc.
+		
 
 
 }
