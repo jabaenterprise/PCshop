@@ -74,9 +74,7 @@ public class Client {
 			//printing total cost and confirming the buy
 			
 			this.money-=cost;
-			for(Map.Entry<Product, Integer> entry:cart.entrySet()){
-				cost += entry.getKey().getPrice()*entry.getValue();
-			}
+		
 			
 		}
 	
