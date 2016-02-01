@@ -1,6 +1,7 @@
 package shop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import client.Client;
 import products.Product;
@@ -11,7 +12,8 @@ public class Shop {
 	//Fields:
 	private String name;
 	private ArrayList<Client> clients;
-	private ArrayList<ArrayList<Product>> products;
+	//private ArrayList<ArrayList<Product>> products;
+	private HashMap<products.Type,ArrayList<Product>> products;
 	private static Shop instance; // let's use the Singleton design pattern in order to call the instance of the shop in user class
 	
 	//Constructor:
