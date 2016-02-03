@@ -4,7 +4,7 @@ import exceptions.InvalidPriceException;
 import exceptions.InvalidQuantityException;
 import exceptions.NotEnoughInStockException;
 
-public abstract class Product {
+public class Product {
 
 	
 	//Fields:
@@ -14,7 +14,8 @@ public abstract class Product {
 	private String info;
 	private int quantity;
 	private boolean isAvailable;
-	private Type type; //See the enum file!
+	private Type type; //See the enum file! 
+	//Georgi: I'm not sure we need this here if we are to have "Product" as non abstract class otherwise we need to add "Type" to constructor
 	
 
 	

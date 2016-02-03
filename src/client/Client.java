@@ -2,7 +2,6 @@ package client;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import exceptions.IsInCartException;
 import exceptions.NotEnoughInStockException;
 import products.Product;
@@ -82,27 +81,38 @@ public class Client {
 	
 	
 	//Setters to be used by the client for changing some of his/her profile info, if needed:
-	public void setFirstName(String newFirstName) {
-		this.firstName = newFirstName;
-	}
-	public void setFamilyName(String newFamilyName) {
-		this.familyName = newFamilyName;
-	}
+//	public void setFirstName(String newFirstName) {
+//		this.firstName = newFirstName;
+//	}
+//	public void setFamilyName(String newFamilyName) {
+//		this.familyName = newFamilyName;
+//	}
 	public void setPassword(String newPassword) {
 		this.password = newPassword;
 	}
-	public void setCity(String newCity) {
-		this.city = newCity;
+//	public void setCity(String newCity) {
+//		this.city = newCity;
+//	}
+//	public void setAddress(String newAddress) {
+//		this.address = newAddress;
+//	}
+//	public void setPostalCode(String newPostalCode) {
+//		this.postalCode = newPostalCode;
+//	}
+//	public void setPhoneNumber(String newPhoneNumber) {
+//		this.phoneNumber = newPhoneNumber;
+//	}
+	public void editBasicInfo(String firstName,String familyName, String address,String postalCode,String phoneNumber){
+		this.firstName = firstName;
+		this.familyName = familyName;
+		this.address = address;
+		this.postalCode = postalCode;
+		this.phoneNumber = phoneNumber;
+		
+		
 	}
-	public void setAddress(String newAddress) {
-		this.address = newAddress;
-	}
-	public void setPostalCode(String newPostalCode) {
-		this.postalCode = newPostalCode;
-	}
-	public void setPhoneNumber(String newPhoneNumber) {
-		this.phoneNumber = newPhoneNumber;
-	}
+	
+	
 	
 	
 	
