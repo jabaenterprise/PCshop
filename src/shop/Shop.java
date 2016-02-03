@@ -143,8 +143,13 @@ public class Shop {
 	//then he can use the bellow method to add the product to the shop:
 	public void addProductToShop(Product p) {
 		try {
-			if (p != null && !doWeHaveSuchProductInShop(p)) {
-				products.get(p.getType()).add(p);
+			if(p!=null){
+				if(products.get(p.getType())==null){//if product is added for first time create new list
+					products.put(p.getType(), new ArrayList<Product>());
+				}
+				if (!doWeHaveSuchProductInShop(p)) {
+					products.get(p.getType()).add(p);
+				}
 			}
 		} catch (SuchProductAlreadyExistsException e) {
 			System.out.println(e.getMessage());
@@ -152,22 +157,23 @@ public class Shop {
 	}
 	
 	private boolean doWeHaveSuchProductInShop(Product p) throws SuchProductAlreadyExistsException {
-		int counter = 0;
-		for (Product product : this.products.get(p.getType())) {
-			if (product.equals(p)) {
-				
-					throw new SuchProductAlreadyExistsException(p.getProducer() + " " + p.getModel() + " already exists.");
+		if(!this.products.isEmpty()){
+			int counter = 0;
+			for (Product product : this.products.get(p.getType())) {
+				if (product.equals(p)) {
 					
-				
-			} else {
-				counter++;
+						throw new SuchProductAlreadyExistsException(p.getProducer() + " " + p.getModel() + " already exists.");
+						
+				} else {
+					counter++;
+				}
 			}
+			if (counter == this.products.get(p.getType()).size()) {
+				return false;
+			}
+			return true;
 		}
-		
-		if (counter == this.products.get(p.getType()).size()) {
-			return false;
-		}
-		return true;
+		return false;//there is no such product
 	}
 	
 	

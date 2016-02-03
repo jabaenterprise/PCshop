@@ -13,6 +13,7 @@ public class Client {
 	
 	//Fields:
 	private static int ID = 1;
+	private static final int MIN_PRODUCT_QUANTITY = 1;
 	private final int userID;
 	private String firstName;
 	private String familyName;
@@ -137,7 +138,7 @@ public class Client {
 
 	public void addProductToCart(Product p){ 
 		if(!cart.containsKey(p)){
-			cart.put(p, 0);
+			cart.put(p, MIN_PRODUCT_QUANTITY);
 		} else
 			try {
 				throw new IsInCartException(p.getProducer() + " " + p.getModel() + " is already in your cart.");
@@ -174,10 +175,6 @@ public class Client {
 				System.out.println(e.getMessage());
 			}
 		}
-		this.money-=cost;
+		this.money-=cost;		
 	}
-		
-	
-		
-		
 }
