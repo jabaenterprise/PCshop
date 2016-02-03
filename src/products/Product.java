@@ -4,7 +4,7 @@ import exceptions.InvalidPriceException;
 import exceptions.InvalidQuantityException;
 import exceptions.NotEnoughInStockException;
 
-public class Product {
+public abstract class Product {
 
 	
 	//Fields:
@@ -14,16 +14,16 @@ public class Product {
 	private String info;
 	private int quantity;
 	private boolean isAvailable;
-	private Type type; //See the enum file! 
-	//Georgi: I'm not sure we need this here if we are to have "Product" as non abstract class otherwise we need to add "Type" to constructor
-	
+	private Type type; 
+		
 
 	
 	//Constructor:
-	public Product(String producer, String model, double price, String info, int quantity) throws InvalidPriceException, InvalidQuantityException {
+	public Product(String producer, String model, double price, String info, int quantity, Type type) throws InvalidPriceException, InvalidQuantityException {
 		this.producer = producer;
 		this.model = model;
 		this.info = info;
+		this.type = type;
 		if (price > 0) {
 			this.price = price;
 		} else {
@@ -53,11 +53,27 @@ public class Product {
 	public String getModel() {
 		return this.model;
 	}
-	
-	
+	public Type getType() {
+		return this.type;
+	}
+		
 	
 	//Setters: - only the one needed!
-	
+ 	public void setQuantity(int newQuantity) throws InvalidQuantityException {
+		if (newQuantity >= 0) {
+			this.quantity = newQuantity;
+		} else {
+			throw new InvalidQuantityException("Can't set a negative quantity for " + this.producer + " " + this.model);
+		}
+	}
+		
+	public void setPrice(double newPrice) throws InvalidPriceException {
+		if (newPrice > 0) {
+			this.price = newPrice;
+		} else {
+			throw new InvalidPriceException("Can't set " + newPrice + " for the " + this.producer + " " + this.model + " price.");
+		}
+	}
 	
 	
 	
@@ -88,10 +104,9 @@ public class Product {
 	}
 		
 	
-	
-	
-	//Other methods:
+	//Methods:
 	public void viewProduct() {
+		System.out.println("Type: " + this.type);
 		System.out.println("Producer: " + this.producer);
 		System.out.println("Model: " + this.model);
 		System.out.println("Price: " + this.price + " BGL");
@@ -110,5 +125,5 @@ public class Product {
 		}
 	}
 	
-	
+		
 }
