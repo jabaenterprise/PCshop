@@ -1,10 +1,13 @@
 package client;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import exceptions.IsInCartException;
 import exceptions.NotEnoughInStockException;
+import exceptions.NotEnoughMoneyException;
 import products.Product;
+import shop.Shop;
 
 
 
@@ -23,10 +26,11 @@ public class Client {
 	private String address;
 	private String postalCode;
 	private String phoneNumber;
-	private double money;
+	public/*private*/ double money;
 	private HashMap<Product, Integer> cart;
-	
-	
+	private boolean isLoggedIn = false;
+	private Shop shop;
+
 	
 	//Constructor:
 	public Client(String firstName, String familyName, String eMail, String password, String city, String address, String postalCode) {
@@ -39,6 +43,8 @@ public class Client {
 		this.address = address;
 		this.postalCode = postalCode;
 		this.cart = new HashMap<Product, Integer>();
+		this.shop = shop.getShop();
+		
 	}
 	
 	
@@ -136,19 +142,41 @@ public class Client {
 		}
 	}
 
-	public void addProductToCart(Product p){ 
-		if(!cart.containsKey(p)){
-			cart.put(p, MIN_PRODUCT_QUANTITY);
-		} else
-			try {
-				throw new IsInCartException(p.getProducer() + " " + p.getModel() + " is already in your cart.");
-			} catch (IsInCartException e) {
-				System.out.println(e.getMessage());
+	public void addProductToCart(Product p) { 
+		for(Product products:shop.getProducts().get(p.getType()))
+			if(products.equals(p)&&products.getQuantity()>=MIN_PRODUCT_QUANTITY){
+				if(!cart.containsKey(p)){
+					cart.put(p, MIN_PRODUCT_QUANTITY);
+				} else
+					try {
+						throw new IsInCartException(p.getProducer() + " " + p.getModel() + " is already in your cart.");
+					} catch (IsInCartException e) {
+						System.out.println(e.getMessage());
+					}
 			}
+		
+//			} catch (IsInCartException e) {
+//				System.out.println(e.getMessage());
+//			}
 	}
-
+//fixed this because the products still had to be paid even if there was not enough in stock 
 	public void setQuantityOfAProductInCart(Product p, int quantity) {
-		this.cart.put(p, quantity);
+		for(Product products:shop.getProducts().get(p.getType()))
+			if(products.equals(p)&&products.getQuantity()>=quantity){
+				this.cart.put(p, quantity);
+				break;
+			}
+			else{
+				this.cart.put(p, products.getQuantity());
+				try {
+					products.decreaseQuantity(products.getQuantity());
+				} catch (NotEnoughInStockException e) {
+					System.out.println("something is very wrong if this happens");
+				}
+				break;
+			}
+				
+		
 	}
 		
 	public void showTotalPriceOfProductsInCart() {
@@ -157,24 +185,52 @@ public class Client {
 			cost+= entry.getKey().getPrice()*entry.getValue();
 		}
 		this.money-=cost;
-		System.out.println("Total cost: " + cost + " BGL");
+		System.out.println("Total cost: " + cost + " BGN");
 	}
 
 	public void removeProductFromCart(Product p){
 		if(this.cart.containsKey(p))
 			this.cart.remove(p);
 	}
-			
-	public void buyProductsInCart(){
+//fixed buying without money problem 			
+	public void buyProductsInCart() throws NotEnoughMoneyException{
 		double cost = 0;
-		for(Map.Entry<Product, Integer> entry : this.cart.entrySet()){
-			cost += entry.getKey().getPrice()*entry.getValue();
-			try {
-				entry.getKey().decreaseQuantity(entry.getValue());
-			} catch (NotEnoughInStockException e) {
-				System.out.println(e.getMessage());
+		
+		if(isLoggedIn){
+			System.out.println("?");
+			for(Map.Entry<Product, Integer> entry : this.cart.entrySet()){
+				cost += entry.getKey().getPrice()*entry.getValue();
+				try {
+					entry.getKey().decreaseQuantity(entry.getValue());
+				} catch (NotEnoughInStockException e) {
+					System.out.println(e.getMessage());
+				}
 			}
+			if(money<cost){
+				throw new NotEnoughMoneyException("Not enough money in you ballance!");
+			
+			}
+			this.money-=cost;	
 		}
-		this.money-=cost;		
+		
+		
+	}
+
+
+
+	public void addMoneyToAccount(int money) {
+		if(money>0){
+			this.money= money;
+			System.out.println(money+"BGN added to account");
+		}
+			
+		
+	}
+
+
+
+	public void setIsLoggedIn(boolean b) {
+		isLoggedIn = b;
+		
 	}
 }
