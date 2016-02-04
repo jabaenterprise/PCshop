@@ -57,6 +57,9 @@ public abstract class Product {
 		return this.type;
 	}
 		
+	public int getQuantity(){
+		return quantity;
+	}
 	
 	//Setters: - only the one needed!
  	public void setQuantity(int newQuantity) throws InvalidQuantityException {
