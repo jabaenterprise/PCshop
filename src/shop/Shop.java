@@ -33,8 +33,9 @@ public class Shop {
 		this.eMail = "someEmail@address";
 	}
 	
-	
-	
+	public HashMap<products.Type,ArrayList<Product>>getProducts(){
+		return products;
+	}
 	//Getters: - only the one we need!
 	
 	//Setters: - only the one we need!
@@ -58,17 +59,19 @@ public class Shop {
 	}
 		
 	//CLIENT-wise:
-	public void createNewClient(String firstName, String familyName, String eMail, String password, String city, String address, String postalCode) {
+	public Client createNewClient(String firstName, String familyName, String eMail, String password, String city, String address, String postalCode) throws SuchUserAlreadyExistsException {
 		if (!this.checkIfSuchClientExists(eMail)) {
 			Client newClient = new Client(firstName, familyName, eMail, password, city, address, postalCode);
 			this.clients.add(newClient);
-		} else {
-			try {
+			return newClient;
+		} 
+//		else {
+//			try {
 				throw new SuchUserAlreadyExistsException("Can't register new client. Client with such e-mail address already exists.");
-			} catch (SuchUserAlreadyExistsException e) {
-				System.out.println(e.getMessage());
-			}
-		}
+//			} catch (SuchUserAlreadyExistsException e) {
+//				System.out.println(e.getMessage());
+//			}
+//		}
 	}
 	
 	private boolean checkIfSuchClientExists(String eMail) {
@@ -86,20 +89,19 @@ public class Shop {
 		return null;
 	}
 	
-	public HashMap<String,String> resetForgottenPassword(String email) {
-		if(checkIfSuchClientExists(email)){
-			try {
+	public void resetForgottenPassword(String email) throws LoginException {
+		if(checkIfSuchClientExists(email))//{
+//			try {
 				throw new LoginException("No account has been registered with this e-mail");
-			} catch (LoginException e) {
-				System.out.println(e.getMessage());
-			}
-		}
+//			} catch (LoginException e) {
+//				System.out.println(e.getMessage());
+//			}
+//		}
 		String newPassword = Integer.toString(email.hashCode());
 		findClient(email).setPassword(newPassword);
 	
-		HashMap<String, String> credentials = new HashMap<>();
-		credentials.put(email, newPassword);
-		return credentials;
+		System.out.println("New password sent to " + email);
+		//some method which can send e - mails....
 	}
 		
 	
@@ -108,38 +110,49 @@ public class Shop {
 	//if the entered e-mail and password match the shop's ones the user enters as admin and can use the admin methods.
 	//if they don't match they are used as arguments in the isCorrectLogin(String eMali, String password) method.
 	//if the user is registered he goes to the wellcome page.
-	public boolean isAdmin(String eMail, String password) {
+	private boolean isAdmin(String eMail, String password) {
 		if (eMail.equalsIgnoreCase(this.eMail) && password.equals(this.password)) {
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean isCorrectLogin(String eMail, String password) {
-		int counter = 0;
-		for (Client clt : this.clients) {
-			if (clt.getEmail().equalsIgnoreCase(eMail) && clt.getPassword().equals(password)) {
-				return true;
-			} else {
-				counter++;
-			}
-		} 
-		if (counter == this.clients.size()) {
-			try {
-				throw new LoginException("Invalid eMail or password.");
-			} catch (LoginException e) {
-				System.out.println(e.getMessage());
-				
+	public boolean isCorrectLogin(String eMail, String password) throws LoginException {
+		if(isAdmin(eMail, password)){
+			//open admin page 
+		}
+		else{
+			for (Client clt : this.clients) {
+				if (clt.getEmail().equalsIgnoreCase(eMail) && clt.getPassword().equals(password)){ //{
+					clt.setIsLoggedIn(true);
+					return true;
+				}
+					
 			}
 		}
-		return false;
+		throw new LoginException("Invalid eMail or password.");
+//		int counter = 0;
+		
+//			} else {
+//				counter++;
+//			}
+	
+//		if (counter == this.clients.size()) {
+//			try {
+				
+//			} catch (LoginException e) {
+//				System.out.println(e.getMessage());
+//				
+//			}
+//		}
+//		return false;
 	}
 	
 	
 	//PRODUCT-wise:
 	//Used only by admin:
 	//The admin page will have a scroll with different product types. When he clicks on 
-	//one of them it invokes the corresonding constructor - a page with fields for entering the values of the corresponding item.
+	//one of them it invokes the corresponding constructor - a page with fields for entering the values of the corresponding item.
 	//then he can use the bellow method to add the product to the shop:
 	public void addProductToShop(Product p) {
 		try {
@@ -158,20 +171,21 @@ public class Shop {
 	
 	private boolean doWeHaveSuchProductInShop(Product p) throws SuchProductAlreadyExistsException {
 		if(!this.products.isEmpty()){
-			int counter = 0;
+//			int counter = 0;
 			for (Product product : this.products.get(p.getType())) {
 				if (product.equals(p)) {
 					
 						throw new SuchProductAlreadyExistsException(p.getProducer() + " " + p.getModel() + " already exists.");
-						
-				} else {
-					counter++;
 				}
 			}
-			if (counter == this.products.get(p.getType()).size()) {
+//				} else {
+//					counter++;
+//				}
+//			}
+//			if (counter == this.products.get(p.getType()).size()) {
 				return false;
-			}
-			return true;
+//			}
+//			return true;
 		}
 		return false;//there is no such product
 	}
