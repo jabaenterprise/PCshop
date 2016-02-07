@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta  charset="UTF-8">
 <title>Cart and User Info</title>
-<link type="text/css" href="style/usercartstyles.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style/UserCartStyles.css" >
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
 <script type="text/javascript" >
@@ -91,10 +91,10 @@ function toggle_visibility(id) {
 		<p>First name: Xxxxxx</p>
 		<p>Surname: Xxxxxxx</p>
 		<p>Surname: Xxxxxxx</p>
-		<p>City: Xxxxxxx</p>
+		<p>City: Xxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxx</p>
 		<p>Address: Xxxxxxx</p>
 		<p>Postal Code: Xxxxxxx</p>
-	<div id="wrapper">
+
 
 		<p>
 			<a href="javascript:void(0)" onclick="toggle_visibility('popupEditWindow');"><button id="editInfoButton">Edit info</button></a>
@@ -102,9 +102,6 @@ function toggle_visibility(id) {
 			<a href="javascript:void(0)" onclick="toggle_visibility('changePassword');"><button id="changePasswordButton">Change password</button></a>
 		</p>
 
-
-	</div>
-	<!-- wrapper end -->
 
 
 	</div>
@@ -115,21 +112,20 @@ function toggle_visibility(id) {
 		
 		<table id = "table" title="" > 
 			
-
 			<tr >
 				<th></th>
 				<th>Component maker</th>
 				<th>Component model</th>
-				<th>Price in BGN<th>
-				<th>Quantity<th>
+				<th>Price in BGN</th>
+				<th>Quantity</th>
 			</tr>
 			<tr>
-				<td><a href="#"><img alt="GPU" src="http://static1.squarespace.com/static/56119b9ce4b09e1a44f23684/5611a127e4b00eddebd6352a/561c39cde4b0a49ad08da880/1444690384143/20150618164329_src.png?format=500w"
+				<td><a href="singlegpu.html"><img alt="GPU" src="http://static1.squarespace.com/static/56119b9ce4b09e1a44f23684/5611a127e4b00eddebd6352a/561c39cde4b0a49ad08da880/1444690384143/20150618164329_src.png?format=500w"
 						height="150px" width="150px" /></a></td>
 				<td>xxxxxxxxxxxxxxxxxxxxxx</td>
 				<td>xxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
 				<td><input disabled="disabled" name = "price" value = "450" class = "price"/></td>
-				<td></td>
+			
 				
 				<td > 
 					<input type="button" value="+" id="add1" class="add" /> 
@@ -139,11 +135,11 @@ function toggle_visibility(id) {
        			 
 			</tr>
 			<tr >
-				<td><a href="#"><img alt="Mother board" src="http://i847.photobucket.com/albums/ab32/flint117/motherboard.png:original" height="150px"	width="150px" /></a></td>
+				<td><a href="singleCPU.html"><img alt="CPU" src="http://brain-images.cdn.dixons.com/4/4/10126944/u_10126944.jpg" height="150px"	width="150px" /></a></td>
 				<td>xxxxxxxxxxxxxxxxxxxxxxxxxx</td>
 				<td>xxxxxxxxxxxxxxx</td>
 				<td><input disabled="disabled" name = "price" value = "120" class = "price" /></td>
-				<td></td>
+			
 				<td > 
 					 <input type="button" value="+" id="add1" class="add" /> 
 					 <input type="text" id="qty1"  name="quantity" value="1" class="qty" />
@@ -151,13 +147,13 @@ function toggle_visibility(id) {
        			</td>
 			</tr>
 			<tr>
-				<td><a href="#"><img alt="Monitor" src="img/monitor.png" height="150px"	width="150px"  /></a></td>
+				<td><a href="singlemonitor.html"><img alt="Monitor" src="http://brain-images.cdn.dixons.com/4/6/10132564/u_10132564.jpg" height="150px"	width="150px"  /></a></td>
 				<td>xxxxxxxx</td>
 				<td>xxxxxxxxxxxxxxxxxxxx</td>
 				
 				<td><input disabled="disabled" name = "price" value = "112" class = "price"/></td>
 				
-				<td></td>
+			
 				<td >
 				 	 <input type="button"  value="+" id="add1" class="add" /> 
 					 <input type="text" id="qty1"  name="quantity" value="1" class="qty" />
@@ -166,12 +162,12 @@ function toggle_visibility(id) {
        			 
 			</tr>
 			<tr>
-				<td><a href="#"><img alt="Hard drive" src="ssd.png" height="150px"	width="150px"  /></a></td>
+				<td><a href="singleHD.html"><img alt="Hard drive" src="http://brain-images.cdn.dixons.com/1/0/10116701/u_10116701.jpg" height="150px"	width="150px"  /></a></td>
 				<td>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
 				<td>xxxxxxxx</td>
 				
 				<td><input disabled="disabled" name = "price" value = "500" class = "price"/></td>
-				<td></td>
+			
 				<td > 
 					 <input type="button" value="+" id="add1" class="add" />
 					 <input type="text" id="qty1"  name="quantity" value="1" class="qty" />
@@ -180,30 +176,33 @@ function toggle_visibility(id) {
 			</tr>
 			<tr>
 			
-			<td>
-				<br>	<button id="editInfoButton" type="button" value="Calculate" onclick="calculate(this.form);">Calculate</button>
- 			</td>
+		
  			<td></td>
  			<td></td>
- 			<td></td>
- 			<td></td>
+ 			<td><button  id="editInfoButton"  type="button" value="Calculate" onclick="calculate(this.form);">Calculate</button>Total sum:</td>
+ 		
  			<td class="total" >
- 			Total sum:<output name="total" class="output"  ></output>BGN
+ 			<output name="total" class="output"  ></output>BGN
+ 			<td><a href="index.html"><button id="buyButton" >Buy Products</button></a></td>
  			</tr>
 			<tr>
+			
 
 		</table>
 		
 		</form>
- 		 	<br ><a href="index.html"><button id="buyButton">Buy Products</button></a>
+ 		 	
  		
 	</div>
 	<!-- end of cart -->
 	</div>
 	<!-- end of display -->
+	
+	
+	
 	<div id="popupEditWindow">
 		<div class="popupBoxWrapper">
-			<a href="javascript:void(0)" onclick="toggle_visibility('popupEditWindow');" class="close" ><img  alt="Close" src="http://vignette4.wikia.nocookie.net/dynastywarriors/images/a/a5/X.png/revision/latest?cb=20131129190405"></a>
+			<a href="javascript:void(0)" onclick="toggle_visibility('popupEditWindow');" class="close" ><img  alt="Close" src="http://vignette4.wikia.nocookie.net/dynastywarriors/images/a/a5/X.png/revision/latest?cb=20131129190405" height="20px" width="20px"></a>
 			<div class="popupBoxContent">
 				<h3>Edit information</h3>
 				<form action="edit info">
@@ -238,7 +237,7 @@ function toggle_visibility(id) {
 
 	<div id="changePassword">
 		<div class="popupBoxWrapper">
-		<a href="javascript:void(0)" onclick="toggle_visibility('changePassword');"class="close" ><img  alt="Close" src="http://vignette4.wikia.nocookie.net/dynastywarriors/images/a/a5/X.png/revision/latest?cb=20131129190405"></a>
+		<a href="javascript:void(0)" onclick="toggle_visibility('changePassword');"class="close" ><img  alt="Close" src="http://vignette4.wikia.nocookie.net/dynastywarriors/images/a/a5/X.png/revision/latest?cb=20131129190405" height="20px" width="20px"></a>
 			<div class="popupBoxContent">
 				<h3>Change password</h3>
 				<p>
