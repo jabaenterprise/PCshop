@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+	<title>Admin Home</title>
+	<link rel="stylesheet" href="style/New.css"/>
+</head>
+
+<body>
+
+	<div id = "logo">
+		<a href="index.html">
+			<img src = "img/PCSHOP.png"/>
+		</a>
+	</div>
+
+	<div id="top_nav">
+		<ul>
+			<li><a href="AdminHome.html">New Product</a>
+				<ul>
+					<li><a href="NewCase.html">Case</a></li>
+					<li><a href="NewCPU.html">CPU</a></li>
+					<li><a href="NewGPU.html">GPU</a></li>
+					<li><a href="NewHDD.html">HDD</a></li>
+					<li><a href="NewMonitor.html">Monitor</a></li>
+					<li><a href="NewMB.html">Motherboard</a></li>
+					<li><a href="NewRAM.html">RAM</a></li>	
+				</ul>
+			</li>
+			<li><a href="EditProduct.html">Edit Product</a></li>
+			<li><a href="EditAdminProfile.html">Edit Profile</a></li>
+			<<li><a href="index.html">Home</a></li>
+		</ul>
+	</div>
+
+
+
+	<div id="product_properties">
+		
+	<form class="properties" id="properties">
+		<h2>Enter CPU properties:</h2>	
+		<p class="producer">
+			<input type="text" name="producer" id="producer" placeholder="enter producer" />
+		</p>
+	
+		<p class="model">
+			<input type="text" name="model" id="model" placeholder="enter model" />
+		</p>
+		
+		<p class="price">
+			<input type="number" step="any" min="0" name="price" id="price" placeholder="enter price" />
+		</p>
+		
+		<p class="quantity">
+			<input type="number" step="1" min="0" name="quantity" id="quantity" placeholder="enter quantity" />
+		</p>
+		
+		<p class="info">
+			<textarea name="info" id="info" placeholder="enter product info" /></textarea>
+		</p>
+		
+		<p class="number_of_cores">
+			<input type="number" step="1" min="1" name="number_of_cores" id="number_of_cores" placeholder="enter number of cores" />
+		</p>
+		
+		<p class="clock_speed">
+			<input type="number" step="any" min="0" name="clock_speed" id="clock_speed" placeholder="enter clock speed" />
+		</p>
+		
+		<p class="socket">
+			<input type="text" name="socket" id="socket" placeholder="enter socket type" />
+		</p>
+		
+		<p class="create">
+			<input type="submit" id="create" value="create"/>
+		</p>
+		
+		<p class="add">
+			<input type="submit" id="add" value="add to shop"/>
+		</p>
+	</form>
+	</div>
+
+
+
+
+
+
+</body>
+
+</html>

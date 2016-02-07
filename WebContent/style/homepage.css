@@ -220,4 +220,8 @@ html, body{
 	background-color: black;
 	color: orange;
 }
-
+#cart{
+position: absolute;
+	top:120px;
+	right:140px;
+}

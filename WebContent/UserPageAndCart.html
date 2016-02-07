@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>Cart and User Info</title>
+<link type="text/css" href="style/usercartstyles.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+<script type="text/javascript" >
+function calculate(form){
+	var sum = 0;
+
+	for(var i = 0; i < form.quantity.length; i++)
+		sum += (Number(form.quantity[i].value)*Number(form.price[i].value));
+	form.total.value = sum;
+	}
+function toggle_visibility(id) {
+    var e = document.getElementById(id);
+    if(e.style.display == 'block')
+       e.style.display = 'none';
+    else
+       e.style.display = 'block';
+}
+
+
+	var password = document.getElementById("password"), confirm_password = document
+			.getElementById("confirm_password");
+
+	function check(input) {
+		if (input.value != document.getElementById('password').value) {
+			input.setCustomValidity('The two passwords must match.');
+		} else {
+			// input is valid -- reset the error message
+			input.setCustomValidity('');
+		}
+	}
+	
+	$(function()
+			{
+			    $(".add").click(function()
+			    {
+			        var currentVal = parseInt($(this).next(".qty").val());
+			        if (currentVal != NaN)
+			        {
+			            $(this).next(".qty").val(currentVal + 1);
+			        } 
+			    });
+
+			    $(".minus").click(function()
+			    		
+			    {  var currentVal = parseInt($(this).prev(".qty").val());
+		    	   if (currentVal ==0)
+			        {
+			           return;
+			        }
+			      
+			        if (currentVal != NaN)
+			        {
+			            $(this).prev(".qty").val(currentVal - 1);
+			        }
+			     
+			    });
+			});
+</script>
+
+</head>
+
+<body>
+	<header>
+		<div id="logo">
+			<a href="index.html"> <img src="http://pc-stop.co.uk/img/logo.png" />
+			</a>
+		</div>
+	</header>
+	<nav>
+	<ul>
+	  <li><a class="active" href="index.html">Home</a></li>
+	  <li><a href="CaseCategory.html">Cases</a></li>
+	  <li><a href="ramCategory.html">RAM</a></li>
+	  <li><a href="hdCategory.html">Hard Drives</a></li>
+	  <li><a href="cpuCategory.html">CPU</a></li>
+	  <li><a href="gpuCategory.html">GPU</a></li>
+	  <li><a href="monitorCategory.html">Monitors</a></li>
+	  <li><a href="mbCategory.html">Mother boards</a></li>
+	</ul>
+	
+	</nav>
+	<div id="displayPage">
+	<div id="info" >
+		<h1>User Information</h1>
+		<p>First name: Xxxxxx</p>
+		<p>Surname: Xxxxxxx</p>
+		<p>Surname: Xxxxxxx</p>
+		<p>City: Xxxxxxx</p>
+		<p>Address: Xxxxxxx</p>
+		<p>Postal Code: Xxxxxxx</p>
+	<div id="wrapper">
+
+		<p>
+			<a href="javascript:void(0)" onclick="toggle_visibility('popupEditWindow');"><button id="editInfoButton">Edit info</button></a>
+		
+			<a href="javascript:void(0)" onclick="toggle_visibility('changePassword');"><button id="changePasswordButton">Change password</button></a>
+		</p>
+
+
+	</div>
+	<!-- wrapper end -->
+
+
+	</div>
+	<!-- end of user information -->
+	<div id="cart">
+	<form >
+		<h1 id="cartH1"> Products in cart</h1></th>
+		
+		<table id = "table" title="" > 
+			
+
+			<tr >
+				<th></th>
+				<th>Component maker</th>
+				<th>Component model</th>
+				<th>Price in BGN<th>
+				<th>Quantity<th>
+			</tr>
+			<tr>
+				<td><a href="#"><img alt="GPU" src="http://static1.squarespace.com/static/56119b9ce4b09e1a44f23684/5611a127e4b00eddebd6352a/561c39cde4b0a49ad08da880/1444690384143/20150618164329_src.png?format=500w"
+						height="150px" width="150px" /></a></td>
+				<td>xxxxxxxxxxxxxxxxxxxxxx</td>
+				<td>xxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+				<td><input disabled="disabled" name = "price" value = "450" class = "price"/></td>
+				<td></td>
+				
+				<td > 
+					<input type="button" value="+" id="add1" class="add" /> 
+					<input type="text" id="qty1"  name="quantity" value="1" class="qty" />
+	       			<input type="button" value="-" id="minus1" class="minus" />  
+       			</td>
+       			 
+			</tr>
+			<tr >
+				<td><a href="#"><img alt="Mother board" src="http://i847.photobucket.com/albums/ab32/flint117/motherboard.png:original" height="150px"	width="150px" /></a></td>
+				<td>xxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+				<td>xxxxxxxxxxxxxxx</td>
+				<td><input disabled="disabled" name = "price" value = "120" class = "price" /></td>
+				<td></td>
+				<td > 
+					 <input type="button" value="+" id="add1" class="add" /> 
+					 <input type="text" id="qty1"  name="quantity" value="1" class="qty" />
+	       			 <input type="button" value="-" id="minus1" class="minus" />      
+       			</td>
+			</tr>
+			<tr>
+				<td><a href="#"><img alt="Monitor" src="img/monitor.png" height="150px"	width="150px"  /></a></td>
+				<td>xxxxxxxx</td>
+				<td>xxxxxxxxxxxxxxxxxxxx</td>
+				
+				<td><input disabled="disabled" name = "price" value = "112" class = "price"/></td>
+				
+				<td></td>
+				<td >
+				 	 <input type="button"  value="+" id="add1" class="add" /> 
+					 <input type="text" id="qty1"  name="quantity" value="1" class="qty" />
+	       			 <input type="button" value="-" id="minus1" class="minus" />  
+       			</td>
+       			 
+			</tr>
+			<tr>
+				<td><a href="#"><img alt="Hard drive" src="ssd.png" height="150px"	width="150px"  /></a></td>
+				<td>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+				<td>xxxxxxxx</td>
+				
+				<td><input disabled="disabled" name = "price" value = "500" class = "price"/></td>
+				<td></td>
+				<td > 
+					 <input type="button" value="+" id="add1" class="add" />
+					 <input type="text" id="qty1"  name="quantity" value="1" class="qty" />
+	       			 <input type="button" value="-" id="minus1" class="minus" />  
+       			</td>
+			</tr>
+			<tr>
+			
+			<td>
+				<br>	<button id="editInfoButton" type="button" value="Calculate" onclick="calculate(this.form);">Calculate</button>
+ 			</td>
+ 			<td></td>
+ 			<td></td>
+ 			<td></td>
+ 			<td></td>
+ 			<td class="total" >
+ 			Total sum:<output name="total" class="output"  ></output>BGN
+ 			</tr>
+			<tr>
+
+		</table>
+		
+		</form>
+ 		 	<br ><a href="index.html"><button id="buyButton">Buy Products</button></a>
+ 		
+	</div>
+	<!-- end of cart -->
+	</div>
+	<!-- end of display -->
+	<div id="popupEditWindow">
+		<div class="popupBoxWrapper">
+			<a href="javascript:void(0)" onclick="toggle_visibility('popupEditWindow');" class="close" ><img  alt="Close" src="http://vignette4.wikia.nocookie.net/dynastywarriors/images/a/a5/X.png/revision/latest?cb=20131129190405"></a>
+			<div class="popupBoxContent">
+				<h3>Edit information</h3>
+				<form action="edit info">
+					<p class="first name">
+						<input type="text" name="First name" id="First name"
+							placeholder="enter first name" />
+					</p>
+					<p class="Surname">
+						<input type="text" name="Surname" id="first name"
+							placeholder="enter surname" />
+					</p>
+					<p class="city">
+						<input type="text" name="city" id="city" placeholder="enter city" />
+					</p>
+					<p class="address">
+						<input type="text" name="address" id="address"
+							placeholder="enter address" />
+					</p>
+					<p class="postal code">
+						<input type="text" name="postal code" id="postal code"
+							placeholder="enter postal code" />
+					</p>
+
+				</form>
+
+				<p>
+					<a href="javascript:void(0)" onclick="toggle_visibility('popupEditWindow');"><input type="submit" value="Save" /></a>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="changePassword">
+		<div class="popupBoxWrapper">
+		<a href="javascript:void(0)" onclick="toggle_visibility('changePassword');"class="close" ><img  alt="Close" src="http://vignette4.wikia.nocookie.net/dynastywarriors/images/a/a5/X.png/revision/latest?cb=20131129190405"></a>
+			<div class="popupBoxContent">
+				<h3>Change password</h3>
+				<p>
+					 <input type="password"	name="oldPassword" id="oldPassword" placeholder="Old password" />
+				</p>
+				<p>
+					 <input type="password" id="password" name="password" placeholder="New password">
+				</p>
+				<p id = "passConf">	
+					<input type="password" id="passwordconf" name="passwordconf" placeholder="Confirm password" oninput="check(this)"  >
+				</p>
+
+
+				<a href="javascript:void(0)" onclick="toggle_visibility('changePassword');"><input  type="submit" value="Save" /></a>
+			</div>
+		</div>
+	</div>
+
+
+
+	
+
+</body>
+
+</html>
