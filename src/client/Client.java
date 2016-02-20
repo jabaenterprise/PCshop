@@ -43,7 +43,7 @@ public class Client {
 		this.address = address;
 		this.postalCode = postalCode;
 		this.cart = new HashMap<Product, Integer>();
-		this.shop = shop.getShop();
+		this.shop = Shop.getShop();
 		
 	}
 	
