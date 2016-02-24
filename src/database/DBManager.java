@@ -15,19 +15,26 @@ public class DBManager {
 	private static final String PASSWORD = "root";
 	private static final String QUERIES_FILE_ADDRESS = "create_PCShop_database.txt";
 	private static DBManager instance;
-	private static String sql;
+	private Connection conn;
+	private static String databaseDeploymentQueries;
 	
 	
 	//Constructor:
-	private DBManager() throws ClassNotFoundException {
-		Class.forName(DBManager.JDBC_DRIVER);
-		this.readFile();
-		createDatabase();
-	
+	private DBManager() {
+		try {
+			Class.forName(DBManager.JDBC_DRIVER);
+			this.conn = DriverManager.getConnection(DBManager.DB_URL, DBManager.USERNAME, DBManager.PASSWORD);
+		} catch (ClassNotFoundException e) {
+			System.out.println("Unable to load database driver: " + e.getMessage());
+		} catch (SQLException e) {
+			System.out.println("Unable to connect to database: " + e.getMessage());
+		}
 	}
 		
+	
 	//Methods:
-	public static DBManager getDBManager() throws ClassNotFoundException {
+	//1. Get the instance of the DBManager:
+	public static synchronized DBManager getDBManager() throws ClassNotFoundException {
 		if (DBManager.instance == null) {
 			DBManager.instance = new DBManager();
 			return DBManager.instance;
@@ -37,6 +44,21 @@ public class DBManager {
 						
 	}
 	
+	//2. Get the instance of the connection:
+	public Connection getConnection() {
+		return this.conn;
+	}
+	
+	//3. Close the connection:
+	public void closeConnection() {
+		try {
+			this.conn.close();
+		} catch (SQLException e) {
+			System.out.println("Error closing connection: " + e.getMessage());
+		}
+	}
+		
+	//4. Read the file with the database creation queries and initialise the "sql" field:
 	private void readFile() {
 	   
 			BufferedReader br = null;
@@ -64,22 +86,24 @@ public class DBManager {
 				}
 			}
 
-	      DBManager.sql = sb.toString();
+	      DBManager.databaseDeploymentQueries = sb.toString();
 	 }
 
-	private void createDatabase() {
+	//5. Deploy the application database:
+	public void deployDatabase() {
 		
-		Connection conn = null;
+		this.readFile();
 		Statement stmt = null;
-		
-		
+				
 		try {
-			conn = DriverManager.getConnection(DBManager.DB_URL, DBManager.USERNAME, DBManager.PASSWORD);
+			
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);
-		
+			stmt.executeUpdate(DBManager.databaseDeploymentQueries);
+			System.out.println("Database deployed.");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+		} catch (NullPointerException e) {
+			System.out.println("Coonection to database is: " + e.getMessage());
 		} finally {
 			try {
 				if (stmt != null) {
