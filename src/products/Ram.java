@@ -7,14 +7,14 @@ public class Ram extends Product{
 
 	
 	//Fields:
-	private String type;
+	private String ramType;
 	private int size;
 	
 	
 	//Constructor:
-	public Ram (String producer, String model, double price, String info, int quantity, Type type, String ramType, int size) throws InvalidPriceException, InvalidQuantityException {
-		super(producer, model, price, info, quantity, type);
-		this.type = ramType;
+	public Ram (String producer, String model, double price, String info, int quantity, String ramType, int size) throws InvalidPriceException, InvalidQuantityException {
+		super(producer, model, price, info, quantity, Type.RAM);
+		this.ramType = ramType;
 		this.size = size;
 	}	
 		
@@ -23,9 +23,19 @@ public class Ram extends Product{
 	@Override
 	public void viewProduct() {
 		super.viewProduct();
-		System.out.println("Type: " + this.type);
+		System.out.println("Type: " + this.ramType);
 		System.out.println("Size: " + this.size + " GB");
 		
+	}
+
+
+	public String getRamType() {
+		return ramType;
+	}
+
+
+	public int getSize() {
+		return size;
 	}
 	
 	

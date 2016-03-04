@@ -12,8 +12,8 @@ public class MotherBoard extends Product{
 	
 		
 	//Constructor:
-	public MotherBoard(String producer, String model, double price, String info, int quantity, Type type, String chipset, String ramSlots, String socketType) throws InvalidPriceException, InvalidQuantityException {
-		super(producer, model, price, info, quantity, type);
+	public MotherBoard(String producer, String model, double price, String info, int quantity, String chipset, String ramSlots, String socketType) throws InvalidPriceException, InvalidQuantityException {
+		super(producer, model, price, info, quantity, Type.MB);
 		this.chipset = chipset;
 		this.ramSlots = ramSlots;
 		this.socketType = socketType;
@@ -28,4 +28,18 @@ public class MotherBoard extends Product{
 		System.out.println("Socket Type: " + this.socketType);
 	}
 
+	public String getChipset() {
+		return chipset;
+	}
+
+	public String getRamSlots() {
+		return ramSlots;
+	}
+
+	public String getSocketType() {
+		return socketType;
+	}
+
+	
+	
 }

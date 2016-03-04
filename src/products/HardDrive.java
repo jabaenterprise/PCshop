@@ -12,8 +12,8 @@ public class HardDrive extends Product{
 
 
 	//Constructor:
-	public HardDrive(String producer, String model, double price, String info, int quantity, Type type, String hdType, int size, int capacity) throws InvalidPriceException, InvalidQuantityException {
-		super(producer, model, price, info, quantity, type);
+	public HardDrive(String producer, String model, double price, String info, int quantity, String hdType, int size, int capacity) throws InvalidPriceException, InvalidQuantityException {
+		super(producer, model, price, info, quantity, Type.HD);
 		this.type = hdType;
 		this.size = size;
 		this.capacity = capacity;
@@ -28,6 +28,18 @@ public class HardDrive extends Product{
 		System.out.println("Type: " + this.type);
 		System.out.println("Capacity: " + this.capacity + " GB");
 		
+	}
+
+	public String getHdType() {
+		return type;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public int getCapacity() {
+		return capacity;
 	}
 	
 

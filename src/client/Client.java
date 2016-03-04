@@ -19,7 +19,7 @@ public class Client {
 	private static final int MIN_PRODUCT_QUANTITY = 1;
 	private final int userID;
 	private String firstName;
-	private String familyName;
+	private String lastName;
 	private String eMail;
 	private String password;
 	private String city;
@@ -36,7 +36,7 @@ public class Client {
 	public Client(String firstName, String familyName, String eMail, String password, String city, String address, String postalCode) {
 		this.userID = Client.ID++;
 		this.firstName = firstName;
-		this.familyName = familyName;
+		this.lastName = familyName;
 		this.eMail = eMail;
 		this.password = password;
 		this.city = city;
@@ -87,6 +87,72 @@ public class Client {
 	
 	
 	
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+
+	public String geteMail() {
+		return eMail;
+	}
+
+
+
+	public String getCity() {
+		return city;
+	}
+
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+
+
+	public double getMoney() {
+		return money;
+	}
+
+
+
+	public HashMap<Product, Integer> getCart() {
+		return cart;
+	}
+
+
+
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+
+
+
+	public Shop getShop() {
+		return shop;
+	}
+
+
+
 	//Setters to be used by the client for changing some of his/her profile info, if needed:
 //	public void setFirstName(String newFirstName) {
 //		this.firstName = newFirstName;
@@ -111,7 +177,7 @@ public class Client {
 //	}
 	public void editBasicInfo(String firstName,String familyName, String address,String postalCode,String phoneNumber){
 		this.firstName = firstName;
-		this.familyName = familyName;
+		this.lastName = familyName;
 		this.address = address;
 		this.postalCode = postalCode;
 		this.phoneNumber = phoneNumber;
@@ -126,7 +192,7 @@ public class Client {
 	//Methods for viewing the client info, managing the cart and buying products from the cart:
 	public void viewClient() {
 		System.out.println("Firts name: " + this.firstName);
-		System.out.println("Family name: " + this.familyName);
+		System.out.println("Family name: " + this.lastName);
 		System.out.println("Address:");
 		System.out.println(this.city);
 		System.out.println(this.address);

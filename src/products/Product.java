@@ -61,6 +61,13 @@ public abstract class Product {
 		return quantity;
 	}
 	
+	
+	public String getInfo() {
+		return info;
+	}
+
+
+
 	//Setters: - only the one needed!
  	public void setQuantity(int newQuantity) throws InvalidQuantityException {
 		if (newQuantity >= 0) {

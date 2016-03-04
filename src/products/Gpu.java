@@ -12,8 +12,8 @@ public class Gpu extends Product{
 	
 	
 	//Constructor:
-	public Gpu(String producer, String model, double price, String info, int quantity, Type type, int memorySize, String maxResolution, String outputInterface) throws InvalidPriceException, InvalidQuantityException {
-		super(producer, model, price, info, quantity, type);
+	public Gpu(String producer, String model, double price, String info, int quantity, int memorySize, String maxResolution, String outputInterface) throws InvalidPriceException, InvalidQuantityException {
+		super(producer, model, price, info, quantity, Type.GPU);
 		this.memorySize = memorySize;
 		this.maxResolution = maxResolution;
 		this.outputInterface = outputInterface;
@@ -27,6 +27,18 @@ public class Gpu extends Product{
 		System.out.println("Memory size: " + this.memorySize + "GB");
 		System.out.println("Max Resolution: " + this.maxResolution);
 		System.out.println("Output Interface: " + this.outputInterface);
+	}
+
+	public int getMemorySize() {
+		return memorySize;
+	}
+
+	public String getMaxResolution() {
+		return maxResolution;
+	}
+
+	public String getOutputInterface() {
+		return outputInterface;
 	}
 	
 	
