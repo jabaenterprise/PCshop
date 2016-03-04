@@ -1,6 +1,6 @@
 package client;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Map;
 import exceptions.IsInCartException;
@@ -15,9 +15,8 @@ public class Client {
 
 	
 	//Fields:
-	private static int ID = 1;
 	private static final int MIN_PRODUCT_QUANTITY = 1;
-	private final int userID;
+	private int userID;
 	private String firstName;
 	private String lastName;
 	private String eMail;
@@ -34,7 +33,6 @@ public class Client {
 	
 	//Constructor:
 	public Client(String firstName, String familyName, String eMail, String password, String city, String address, String postalCode) {
-		this.userID = Client.ID++;
 		this.firstName = firstName;
 		this.lastName = familyName;
 		this.eMail = eMail;
@@ -297,6 +295,27 @@ public class Client {
 
 	public void setIsLoggedIn(boolean b) {
 		isLoggedIn = b;
+		
+	}
+
+
+
+	public void setUserId(int userId) {
+		this.userID = userId;
+		
+	}
+
+
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+		
+	}
+
+
+
+	public void setCart(HashMap<Product, Integer> cart) {
+		this.cart = cart;
 		
 	}
 }

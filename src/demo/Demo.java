@@ -3,14 +3,14 @@ package demo;
 import client.Client;
 import exceptions.InvalidPriceException;
 import exceptions.InvalidQuantityException;
-import exceptions.IsInCartException;
+
 import exceptions.LoginException;
 import exceptions.NotEnoughMoneyException;
 import exceptions.SuchUserAlreadyExistsException;
 import products.Cpu;
 import products.Product;
 import products.Ram;
-import products.Type;
+
 import shop.Shop;
 
 public class Demo {
@@ -18,8 +18,8 @@ public class Demo {
 	public static void main(String[] args) throws InvalidPriceException, InvalidQuantityException {
 
 		Shop emag =  Shop.getShop();
-		Product p = new Cpu("", "",10,  "",5, Type.CPU, 5, 5, "");
-		Product p2 = new Ram("", "",5,  "",5, Type.RAM, "", 5);
+		Product p = new Cpu("", "",10,  "",5,  5, 5, "");
+		Product p2 = new Ram("", "",5,  "",5,  "", 5);
 		emag.addProductToShop(p);
 		emag.addProductToShop(p);
 		emag.addProductToShop(p2);
