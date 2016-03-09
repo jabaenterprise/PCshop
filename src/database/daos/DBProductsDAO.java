@@ -10,11 +10,12 @@ import database.DBManager;
 import products.Product;
 
 public class DBProductsDAO {
-	private static final String db = "pcshop";
+	private static final String db = "pcshop1";
 	void addProduct(Product product){
 		
 	}
-	
+	//sort clause must be added
+	//select everything form products joined with product type + 
 	public static List<String>  getProducts(String categoryType){
 		String query = "SELECT p.img_url as url "
 				+ "FROM "+db+".products p"
@@ -39,4 +40,8 @@ public class DBProductsDAO {
 		
 		return products;
 	}
+	
+	
+	//method for productInfo.jsp
+	//all info for specific product
 }

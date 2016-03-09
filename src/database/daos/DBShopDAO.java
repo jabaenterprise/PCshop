@@ -246,13 +246,8 @@ public class DBShopDAO implements IShopDAO {
 		} catch (InvalidQuantityException e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
-	
-	
 	return results;
 }
 	
-	
-	
+
 }

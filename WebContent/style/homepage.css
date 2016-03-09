@@ -228,10 +228,6 @@ html, body{
 	-webkit-border-radius: 8px 0px 0px 0px; 
 	-moz-border-radius: 8px 0px 0px 0px; 
 	-o-border-radius: 8px 0px 0px 0px; 
-	/*display: none;
-	if a user is logged in this should be 
-	dispalay:block;
-	*/
 }
 
 #buy:hover{
