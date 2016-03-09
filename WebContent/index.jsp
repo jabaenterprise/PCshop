@@ -20,7 +20,6 @@
 <%
 //loginServlet
 //logoutServlet
-//registerServlet
 //products url
 //searchServlet
 //sortServlet
@@ -130,7 +129,8 @@
 		</div>
 		<%
 			} else {
-				String name = (String) session.getAttribute("name");
+				Client client = (Client) session.getAttribute("client");
+				String name = client.getFirstName() + " " + client.getLastName();
 		%>
 		<p id="userName">
 			Hello,<%=name%>. You can
