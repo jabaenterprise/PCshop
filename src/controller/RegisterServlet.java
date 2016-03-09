@@ -1,4 +1,4 @@
-package controler;
+package controller;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -37,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
 			
 			String firstName = request.getParameter("first_name");
 			String familyName = request.getParameter("family_name");
-			String password = request.getParameter("pass_word");
+			String password = request.getParameter("password");
 			String city = request.getParameter("city");
 			String address = request.getParameter("address");
 
@@ -49,7 +49,7 @@ public class RegisterServlet extends HttpServlet {
 			
 			DBShopDAO shdao= new DBShopDAO();
 			shdao.addNewClient(newClient);
-			request.getSession().setAttribute("Loged_User", newClient);
+			request.getSession().setAttribute("client", newClient);
 			boolean isLogged = true;
 			request.getSession().setAttribute("isLogged", isLogged);
 			response.sendRedirect("index.jsp");
