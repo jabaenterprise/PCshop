@@ -88,9 +88,10 @@ html, body{
 	top:150px;
 	margin-top: 20px;
 	margin-left: 38px;
+	margin-bottom:20px;
 	border: 1px solid black;
 	width: 1000px;	
-	padding:30px 10px 0px;
+	padding:30px 10px 40px;
 }
 
 #product-grid{
@@ -131,6 +132,7 @@ html, body{
 	right:30px;
 	width: 300px;
 }
+
 #login input#email{
 	margin-left: 60px;
 	margin-bottom: 5px;
@@ -163,6 +165,22 @@ html, body{
 	left:104px;
 	top:60px;
 	width: 300px;
+}
+
+#logout{
+	position: absolute;
+	top:0px;
+	right:30px;
+	width: 300px;
+	
+}
+
+#logout input[type="submit"]{
+	margin-left: 105px;
+	margin-top: 15px;
+	width: 100px;
+	background-color: #004466;
+	color: #FFF;
 }
 
 #search input{
@@ -220,8 +238,27 @@ html, body{
 	background-color: black;
 	color: orange;
 }
+
 #cart{
-position: absolute;
-	top:120px;
+	position: absolute;
+	top:50px;
 	right:140px;
+}
+
+#userName{
+	position: absolute;
+	top:0px;
+	right:250px;
+	width:150px;
+}
+
+
+#pages{
+	position:absolute;
+	bottom:0px;
+	left:300px;
+}
+
+#pages a, #pages p{
+	display:inline;
 }
