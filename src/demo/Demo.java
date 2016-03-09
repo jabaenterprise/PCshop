@@ -53,7 +53,7 @@ public class Demo {
 			
 //			x.buyProductsInCart();
 			x.showTotalPriceOfProductsInCart();
-			System.out.println(x.money);;
+			System.out.println(x.getMoney());;
 		}
 		
 	}
