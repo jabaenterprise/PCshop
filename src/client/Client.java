@@ -23,7 +23,6 @@ public class Client {
 	private String password;
 	private String city;
 	private String address;
-	private String postalCode;
 	private String phoneNumber;
 	public/*private*/ double money;
 	private HashMap<Product, Integer> cart;
@@ -32,14 +31,13 @@ public class Client {
 
 	
 	//Constructor:
-	public Client(String firstName, String familyName, String eMail, String password, String city, String address, String postalCode) {
+	public Client(String firstName, String familyName, String eMail, String password, String city, String address) {
 		this.firstName = firstName;
 		this.lastName = familyName;
 		this.eMail = eMail;
 		this.password = password;
 		this.city = city;
 		this.address = address;
-		this.postalCode = postalCode;
 		this.cart = new HashMap<Product, Integer>();
 		this.shop = Shop.getShop();
 		
@@ -82,69 +80,36 @@ public class Client {
 	public String getPassword() {
 		return this.password;
 	}
-	
-	
-	
+	public int getUserID() {
+		return userID;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
-
-
-
 	public String getLastName() {
 		return lastName;
 	}
-
-
-
 	public String geteMail() {
 		return eMail;
 	}
-
-
-
 	public String getCity() {
 		return city;
 	}
-
-
-
 	public String getAddress() {
 		return address;
 	}
-
-
-
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
-
-
 	public double getMoney() {
 		return money;
 	}
-
-
-
 	public HashMap<Product, Integer> getCart() {
 		return cart;
 	}
-
-
-
 	public boolean isLoggedIn() {
 		return isLoggedIn;
 	}
-
-
-
 	public Shop getShop() {
 		return shop;
 	}
@@ -177,7 +142,6 @@ public class Client {
 		this.firstName = firstName;
 		this.lastName = familyName;
 		this.address = address;
-		this.postalCode = postalCode;
 		this.phoneNumber = phoneNumber;
 		
 		
@@ -194,7 +158,6 @@ public class Client {
 		System.out.println("Address:");
 		System.out.println(this.city);
 		System.out.println(this.address);
-		System.out.println("Postal code: " + this.postalCode);
 		System.out.println("Phone number: " + this.phoneNumber);
 		
 	}
@@ -280,8 +243,6 @@ public class Client {
 		
 	}
 
-
-
 	public void addMoneyToAccount(int money) {
 		if(money>0){
 			this.money= money;
@@ -291,28 +252,20 @@ public class Client {
 		
 	}
 
-
-
 	public void setIsLoggedIn(boolean b) {
 		isLoggedIn = b;
 		
 	}
-
-
 
 	public void setUserId(int userId) {
 		this.userID = userId;
 		
 	}
 
-
-
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 		
 	}
-
-
 
 	public void setCart(HashMap<Product, Integer> cart) {
 		this.cart = cart;

@@ -59,9 +59,9 @@ public class Shop {
 	}
 		
 	//CLIENT-wise:
-	public Client createNewClient(String firstName, String familyName, String eMail, String password, String city, String address, String postalCode) throws SuchUserAlreadyExistsException {
+	public Client createNewClient(String firstName, String familyName, String eMail, String password, String city, String address) throws SuchUserAlreadyExistsException {
 		if (!this.checkIfSuchClientExists(eMail)) {
-			Client newClient = new Client(firstName, familyName, eMail, password, city, address, postalCode);
+			Client newClient = new Client(firstName, familyName, eMail, password, city, address);
 			this.clients.add(newClient);
 			return newClient;
 		} 

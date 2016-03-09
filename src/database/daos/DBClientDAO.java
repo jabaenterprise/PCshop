@@ -21,7 +21,7 @@ import products.Ram;
 
 
 
-public class ClientDAO implements IClientDAO {
+public class DBClientDAO implements IClientDAO {
 	
 	@Override
 	public Client getClient(String eMailAddress) {
@@ -134,5 +134,7 @@ public class ClientDAO implements IClientDAO {
 	}
 	
 	
-		
+	
+	
+	
 }

@@ -25,7 +25,7 @@ public class Demo {
 		emag.addProductToShop(p2);
 		Client 	x =null;
 		try {
-			x= emag.createNewClient("name", "lastname", "aaa@aaa.com", "xxxx","city", "address","PO BOX");
+			x= emag.createNewClient("name", "lastname", "aaa@aaa.com", "xxxx","city", "address");
 		} catch (SuchUserAlreadyExistsException e) {
 			System.out.println(e.getMessage());
 		}
