@@ -29,7 +29,9 @@ public class RegisterServlet extends HttpServlet {
 		
 		HashSet<String> eMails = cldao.getClientEmails();
 		String eMail = request.getParameter("email");
-		if (eMails.contains(eMail)) {
+		
+		
+		if (eMails.contains(eMail) || eMail == "" || eMail == null) {
 			response.sendRedirect("RetryRegister.jsp");
 		} else {
 			
@@ -39,6 +41,10 @@ public class RegisterServlet extends HttpServlet {
 			String city = request.getParameter("city");
 			String address = request.getParameter("address");
 
+			if (firstName == "" || firstName == null || familyName == "" || familyName == null || password == "" || password == null || city == "" || city == null || address == "" || address == null) {
+			response.sendRedirect("Register.html");
+			}
+			
 			Client newClient = new Client(firstName, familyName, eMail, password, city, address);
 			
 			DBShopDAO shdao= new DBShopDAO();
