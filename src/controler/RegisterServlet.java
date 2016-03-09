@@ -44,6 +44,8 @@ public class RegisterServlet extends HttpServlet {
 			DBShopDAO shdao= new DBShopDAO();
 			shdao.addNewClient(newClient);
 			request.getSession().setAttribute("Loged_User", newClient);
+			boolean isLogged = true;
+			request.getSession().setAttribute("isLogged", isLogged);
 			response.sendRedirect("index.jsp");
 		}
 		
