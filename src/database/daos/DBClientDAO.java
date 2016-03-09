@@ -33,7 +33,7 @@ public class DBClientDAO implements IClientDAO {
 		try {
 			Connection conn = DBManager.getDBManager().getConnection();
 			st = conn.createStatement();
-			ResultSet rs = st.executeQuery("SELECT user_id, first_name, family_name, email_address, pass_word, phone_number, money, city, address FROM pcshop1.clients WHERE email_address='" + eMailAddress + "';");
+			ResultSet rs = st.executeQuery("SELECT user_id, first_name, family_name, email_address, pass_word, phone_number, money, city, address FROM pcshop.clients WHERE email_address='" + eMailAddress + "';");
 			rs.next();
 			int userId = rs.getInt("user_id");
 			String firstName = rs.getString("first_name");
@@ -48,9 +48,9 @@ public class DBClientDAO implements IClientDAO {
 			client = new Client(firstName, familyName, eMail, password, city, address);
 			client.setUserId(userId);
 			client.setPhoneNumber(phoneNumber);
-			client.money = money;
+			client.addMoneyToAccount(money);;
 			
-			ResultSet rs2 = st.executeQuery("SELECT product_id, producer_name, model_name, price, product_info, quantity_in_cart, type FROM pcshop1.products_in_carts JOIN pcshop1.products ON (pcshop1.products_in_cart.product_id=pcshop1.products.product_id) JOIN pcshop1.product_types ON (pcshop1.products.type_id=pcshop1.product_types.type_id) WHERE user_id=" + userId + ";");
+			ResultSet rs2 = st.executeQuery("SELECT product_id, producer_name, model_name, price, product_info, quantity_in_cart, type FROM pcshop.products_in_carts JOIN pcshop.products ON (pcshop.products_in_cart.product_id=pcshop.products.product_id) JOIN pcshop.product_types ON (pcshop.products.type_id=pcshop.product_types.type_id) WHERE user_id=" + userId + ";");
 			Product pr = null;
 			int quantity = 0;
 			while(rs2.next()) {
@@ -151,7 +151,7 @@ public class DBClientDAO implements IClientDAO {
 		try {
 			Connection conn = DBManager.getDBManager().getConnection();
 			st = conn.createStatement();
-			String query = "SELECT email_address FROM PCShop1.clients;";
+			String query = "SELECT email_address FROM pcshop.clients;";
 			ResultSet rs = st.executeQuery(query);
 			while (rs.next()) {
 				eMails.add(rs.getString("email_address"));
@@ -185,7 +185,7 @@ public class DBClientDAO implements IClientDAO {
 		try {
 			Connection conn = DBManager.getDBManager().getConnection();
 			st = conn.createStatement();
-			String query = "SELECT email_address, pass_word FROM PCShop1.clients;";
+			String query = "SELECT email_address, pass_word FROM pcshop.clients;";
 			ResultSet rs = st.executeQuery(query);
 			while (rs.next()) {
 				String eMail = rs.getString("email_address");

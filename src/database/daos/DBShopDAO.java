@@ -138,7 +138,7 @@ public class DBShopDAO implements IShopDAO {
 	@Override
 	public void addNewClient(Client client) {
 
-		String addClient = "INSER INTO pcshop.clients (first_name,last_name,email,password,phone_number,city, address)VALUES(?,?,?,?,?,?,?)";
+		String addClient = "INSER INTO pcshop.clients (first_name,family_name,email,pass_word,phone_number,money, city, address)VALUES(?,?,?,?,?,?,?,?)";
 
 		try {
 
@@ -148,8 +148,9 @@ public class DBShopDAO implements IShopDAO {
 			clientDB.setString(3, client.getEmail());
 			clientDB.setString(4, client.getPassword());
 			clientDB.setString(5, client.getPhoneNumber());
-			clientDB.setString(6, client.getCity());
-			clientDB.setString(7, client.getAddress());
+			clientDB.setString(6, String.valueOf(client.getMoney()));
+			clientDB.setString(7, client.getCity());
+			clientDB.setString(8, client.getAddress());
 
 			clientDB.execute();
 
