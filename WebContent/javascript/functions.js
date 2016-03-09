@@ -12,3 +12,16 @@ function setDisplay(className, isLogged){
 		}
 	}
 }
+
+function startRedirectTimer(){
+	var second = 5;
+	var counter = setInterval(function(){
+	document.getElementById("timer").innerHTML=second;
+	second = second-1;
+	if(second<=0){
+		clearInterval(counter);
+		window.location.href = "index.jsp";
+		return;
+	}
+	}, 1000);
+}

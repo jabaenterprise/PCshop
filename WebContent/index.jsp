@@ -18,8 +18,6 @@
 </head>
 
 <%
-//loginServlet
-//logoutServlet
 //products url
 //searchServlet
 //sortServlet
@@ -27,7 +25,11 @@
 		session.setAttribute("isLogged", false);
 		session.setAttribute("pageId", 1);
 	}
-
+	Client client = (Client) session.getAttribute("client");
+	if(client==null){
+		session.setAttribute("isLogged", false);
+	}
+	
 	boolean isLogged = (boolean) session.getAttribute("isLogged");
 	//isLogged = true;
 
@@ -129,8 +131,10 @@
 		</div>
 		<%
 			} else {
-				Client client = (Client) session.getAttribute("client");
-				String name = client.getFirstName() + " " + client.getLastName();
+				String name = "";
+				if(client!=null){
+					name = client.getFirstName() + " " + client.getLastName();
+				}
 		%>
 		<p id="userName">
 			Hello,<%=name%>. You can

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,23 +38,23 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("emailLogin");
 		String password = request.getParameter("passwordLogin");
 		if(validateEmail(email)&&validatePassword(password)){
-			//do something
-			
-			Client client = new DBClientDAO().getClient(email);
-			System.out.println("Login client: " + client);
-			if(client.getPassword().equals(password)){
-				client.setIsLoggedIn(true);
-				HttpSession session = request.getSession();
-				session.setAttribute("client", client);
-				session.setAttribute("isLogged", true);
-				response.sendRedirect("index.jsp");
-				return;
+			HashMap<String, String> emails = new DBClientDAO().getEMailsAndPasswords();
+			if(!emails.containsKey(email)){
+				response.sendRedirect("Register.html");
 			}else{
-				response.getWriter().append("Invalid email or password");
-				return;
+				if(password.equals(emails.get(email))){
+					Client client = new DBClientDAO().getClient(email);
+					HttpSession session = request.getSession();
+					session.setAttribute("client", client);
+					session.setAttribute("isLogged", true);
+					response.sendRedirect("index.jsp");
+					return;
+				}else{
+					response.sendRedirect("ErrorLogin.jsp?error=wrongEmailOrPassword");
+				}
 			}
 		}else{
-			response.getWriter().append("Invalid email or password");
+			response.sendRedirect("ErrorLogin.jsp?error=invalidEmailOrPassword");
 			return;
 		}
 	}
