@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.HashSet;
+
 
 import client.Client;
 import database.DBManager;
@@ -31,7 +33,7 @@ public class DBClientDAO implements IClientDAO {
 		try {
 			Connection conn = DBManager.getDBManager().getConnection();
 			st = conn.createStatement();
-			ResultSet rs = st.executeQuery("SELECT user_id, first_name, family_name, email_address, pass_word, phone_number, money, city, address FROM pcshop.clients JOIN pcshop.adresses ON (pcshop.clients.address_id=pcshop.adresses.address_id) WHERE email_address='" + eMailAddress + "';");
+			ResultSet rs = st.executeQuery("SELECT user_id, first_name, family_name, email_address, pass_word, phone_number, money, city, address FROM pcshop1.clients JOIN pcshop.adresses ON (pcshop1.clients.address_id=pcshop1.adresses.address_id) WHERE email_address='" + eMailAddress + "';");
 			rs.next();
 			int userId = rs.getInt("user_id");
 			String firstName = rs.getString("first_name");
@@ -132,8 +134,75 @@ public class DBClientDAO implements IClientDAO {
 		return client;
 		
 	}
+
 	
 	
+	@Override
+	public HashSet<String> getClientEmails() {
+		HashSet<String> eMails = new HashSet<String>();
+		Statement st = null;
+		try {
+			Connection conn = DBManager.getDBManager().getConnection();
+			st = conn.createStatement();
+			String query = "SELECT email_address FROM PCShop1.clients;";
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next()) {
+				eMails.add(rs.getString("email_address"));
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				st.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		
+		
+		return eMails;
+	}
+
+
+
+	
+	
+	@Override
+	public HashMap<String, String> getEMailsAndPasswords() {
+		HashMap<String, String> eMailsAndPasswords = new HashMap<String, String>();
+		Statement st = null;
+		try {
+			Connection conn = DBManager.getDBManager().getConnection();
+			st = conn.createStatement();
+			String query = "SELECT email_address, pass_word FROM PCShop1.clients;";
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next()) {
+				String eMail = rs.getString("email_address");
+				String password = rs.getString("pass_word");
+				eMailsAndPasswords.put(eMail, password);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				st.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		
+		
+		return eMailsAndPasswords;
+	}
+
 	
 	
 	
