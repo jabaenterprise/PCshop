@@ -24,7 +24,7 @@ public class Client {
 	private String city;
 	private String address;
 	private String phoneNumber;
-	public/*private*/ double money;
+	private double money;
 	private HashMap<Product, Integer> cart;
 	private boolean isLoggedIn = false;
 	private Shop shop;
@@ -38,6 +38,8 @@ public class Client {
 		this.password = password;
 		this.city = city;
 		this.address = address;
+		this.phoneNumber = "0000000000";
+		this.money = 0;
 		this.cart = new HashMap<Product, Integer>();
 		this.shop = Shop.getShop();
 		
@@ -143,8 +145,6 @@ public class Client {
 		this.lastName = familyName;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
-		
-		
 	}
 	
 	
@@ -243,7 +243,7 @@ public class Client {
 		
 	}
 
-	public void addMoneyToAccount(int money) {
+	public void addMoneyToAccount(double money) {
 		if(money>0){
 			this.money= money;
 			System.out.println(money+"BGN added to account");
@@ -271,4 +271,22 @@ public class Client {
 		this.cart = cart;
 		
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Client [userID=" + userID + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", eMail=" + eMail + ", password="
+				+ password + ", city=" + city + ", address=" + address
+				+ ", phoneNumber=" + phoneNumber + ", money=" + money
+				+ ", cart=" + cart + ", isLoggedIn=" + isLoggedIn + ", shop="
+				+ shop + "]";
+	}
+	
+	//********///
+	
+	
+	
+	
 }
