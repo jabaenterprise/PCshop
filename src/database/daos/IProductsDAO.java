@@ -12,6 +12,8 @@ public interface IProductsDAO {
 	
 	public Product getProduct(String model);
 	
+	public void updatePrice(Product p, double newPrice);
 	
+	public void updateQuantity(Product p, int newQuantity);
 	
 }

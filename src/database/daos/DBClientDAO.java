@@ -69,6 +69,7 @@ public class DBClientDAO implements IClientDAO {
 					String form = rs3.getString("case_form");
 					String size = rs3.getString("case_size");
 					pr = new Case(producer, model, price, info, quantity, form, size);
+					pr.setId(productId);
 					break;
 				case "cpu": 
 					rs3 = st.executeQuery("SELECT number_of_cores, clock_speed, socket FROM pcshop.cpus WHERE product_id=" + productId + ";");
@@ -77,6 +78,7 @@ public class DBClientDAO implements IClientDAO {
 					double clockSpeed = rs3.getDouble("clock_speed");
 					String socket = rs3.getString("socket");
 					pr = new Cpu(producer, model, price, info, quantity, numberOfCores, clockSpeed, socket);
+					pr.setId(productId);
 					break;
 				case "gpu": 
 					rs3 = st.executeQuery("SELECT memory_size, output_interface, max_resolution FROM pcshop.gpus WHERE product_id=" + productId + ";");
@@ -85,6 +87,7 @@ public class DBClientDAO implements IClientDAO {
 					String maxResolution = rs3.getString("max_resolution");
 					String outputInterface = rs3.getString("output_interface");
 					pr = new Gpu(producer, model, price, info, quantity, memorySize, maxResolution, outputInterface);
+					pr.setId(productId);
 					break;
 				case "hd": 
 					rs3 = st.executeQuery("SELECT hd_type, drive_size, drive_capacity FROM pcshop.hard_drives WHERE product_id=" + productId + ";");
@@ -93,6 +96,7 @@ public class DBClientDAO implements IClientDAO {
 					int driveSize = rs3.getInt("drive_size");
 					int driveCapacity = rs3.getInt("drive_size");
 					pr = new HardDrive(producer, model, price, info, quantity, hdType, driveSize, driveCapacity);
+					pr.setId(productId);
 					break;
 				case "mon": 
 					rs3 = st.executeQuery("SELECT screen_size, refresh_rate, matrix_type FROM pcshop.monitors WHERE product_id=" + productId + ";");
@@ -101,6 +105,7 @@ public class DBClientDAO implements IClientDAO {
 					int refreshRate = rs3.getInt("refresh_rate");
 					String matrixType = rs3.getString("matrix_type");
 					pr = new Monitor(producer, model, price, info, quantity, screenSize, refreshRate, matrixType);
+					pr.setId(productId);
 					break;
 				case "mb": 
 					rs3 = st.executeQuery("SELECT chipset, ram_slots, socket_type FROM pcshop.mother_boards WHERE product_id=" + productId + ";");
@@ -109,6 +114,7 @@ public class DBClientDAO implements IClientDAO {
 					String ramSlots = rs3.getString("ram_slots");
 					String socketType = rs3.getString("socket_type");
 					pr = new MotherBoard(producer, model, price, info, quantity, chipset, ramSlots, socketType);
+					pr.setId(productId);
 					break;
 				case "ram": 
 					rs3 = st.executeQuery("SELECT ram_type, ram_size FROM pcshop.rams WHERE product_id=" + productId + ";");
@@ -116,6 +122,7 @@ public class DBClientDAO implements IClientDAO {
 					String ramType = rs3.getString("ram_type");
 					int ramSize = rs3.getInt("ram_size");
 					pr = new Ram(producer, model, price, info, quantity, ramType, ramSize);
+					pr.setId(productId);
 					break;
 				}
 							

@@ -8,6 +8,7 @@ public abstract class Product {
 
 	
 	//Fields:
+	private int id;
 	private String producer;
 	private String model;
 	private double price;
@@ -66,7 +67,13 @@ public abstract class Product {
 		return info;
 	}
 
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	//Setters: - only the one needed!
  	public void setQuantity(int newQuantity) throws InvalidQuantityException {
