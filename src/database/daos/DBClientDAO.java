@@ -48,7 +48,7 @@ public class DBClientDAO implements IClientDAO {
 			client = new Client(firstName, familyName, eMail, password, city, address);
 			client.setUserId(userId);
 			client.setPhoneNumber(phoneNumber);
-			client.addMoneyToAccount(money);;
+			client.addMoneyToAccount(money);
 			
 			ResultSet rs2 = st.executeQuery("SELECT product_id, producer_name, model_name, price, product_info, quantity_in_cart, type FROM pcshop.products_in_carts JOIN pcshop.products ON (pcshop.products_in_cart.product_id=pcshop.products.product_id) JOIN pcshop.product_types ON (pcshop.products.type_id=pcshop.product_types.type_id) WHERE user_id=" + userId + ";");
 			Product pr = null;

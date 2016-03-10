@@ -1,0 +1,237 @@
+INSERT INTO product_types(type_name) VALUE("case");
+
+INSERT INTO product_types(type_name) VALUE("cpu");
+
+INSERT INTO product_types(type_name) VALUE("gpu");
+
+INSERT INTO product_types(type_name) VALUE("hard drive");
+
+INSERT INTO product_types(type_name) VALUE("monitor");
+
+INSERT INTO product_types(type_name) VALUE("ram");
+
+INSERT INTO product_types(type_name) VALUE("mother board");
+
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components","Obsidian 900D Super Tower Case", 464, "
+    Includes three 120mm AF120L and one 140mm AF140L exhaust fan Brushed
+    aluminum front fascia with full cast aluminum surround structure front and rear
+    Five radiator mounting points:
+        Front: up to 360mm
+        Top: up to 480mm (4 x 120) or 420mm (3 x 140)
+        Bottom side one: up to 480mm (4 x 120) or 420mm (3 x 140)
+        Bottom side two (with PSU installed): up to 280mm (2 x 140) or 240mm (2 x 120)
+        Rear: 140mm or 120mm
+    Up to fifteen total fan mount locations
+    Nine tool free 3.5” and screw-in 2.5” combo hard drive bays for maximum storage, upgradable to fifteen total (requires purchasing two additional cages)
+    Four tool-free 5.25” drive bays
+", 20, "img/case/900D_Side_Built.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components","Obsidian Series 550D Mid-Tower Quiet Case", 224, "
+    Four 5.25” drive bays
+    Six 3.5” hard drive bays with 2.5” compatibility
+    Eight expansion slots
+    Supports most 240mm dual radiators (15mm spacing)
+    Two-year warranty
+    Front I/O panel contains:
+        Two USB 3.0 connectors
+        3.5mm headphone and microphone connector
+        Power and reset switches
+", 20, "img/case/550d_hero_down_nomesh.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components","Obsidian 750D Airflow Edition Full Tower Case", 224, "
+    Generous expansion room for building high-performance systems
+    High airflow front mesh design for excellent aircooling performance
+    Full side panel window to view your components
+    Tool-free SSD, Hard Drive, and Optical Drive installation
+    Includes three AF140L fans, with room for up to eight fans
+    Modular drive cage system for highly customizable layouts
+        Two modular drive cages house three 3.5” or 2.5” drives each
+        Four tool-free dedicated SSD cages, sideways mounted
+", 20, "img/case/750D_AF_01.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components","Obsidian Series 450D Mid-Tower PC Case", 119, "
+    Radiator and fan compatibility compatibility:
+        Top: 3 x 120mm or 2 x 140mm (360mm radiator)
+        Front: 2 x 140mm or 2 x 120mm (2 x 140mm included) (280mm radiator)
+        Bottom: 2 x 120mm (240mm radiator)
+        Rear: 1 x 120mm (120mm included) (120mm radiator)
+    Two USB 3.0 front panel connectors, plus headphone and microphone
+    Easily accessed front, top, and PSU dust filters
+    Excellent cable routing with rubber grommets for clean builds
+    Maximum CPU Cooler Height: 165mm
+    Maximum GPU Length: 430mm
+", 20, "img/case/450D_built_three_quarter_hero_down.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components","Obsidian Series 350D Micro ATX PC Case", 99, "
+    Brushed Aluminum Front Panel
+    SLI / Cross Fire ready
+    Five Expansion Slots
+    Two 2.5”, two 3.5”, and two 5.25” tool free drive bays.
+    Modular 2.5” SSD cage
+    Front 140mm and rear 120mm cooling fans. Room for up to five fans total.
+", 20, "img/case/350D_fans_front.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components","Obsidian Series 250D Mini ITX PC Case", 89, "
+    Aluminum front fascia and thick steel construction
+    Overall dimensions: 290mm (H) x 277mm (W) x 351mm (D)
+    Top window for component visibility
+    Thumbscrew backplate removal for PSU and hard drive access
+    Easily removed dust filters on all intakes
+    Simultaneously fit two 3.5”/2.5” drives, two 2.5” drives, one 5.25” drive, a full sized PSU, a 290mm long GPU, and a 240mm radiator
+", 20, "img/case/250D_back_view.png", 1);
+
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components", "Graphite Series 600T Silver Mid-Tower Case", 249, "
+The Graphite Series 600T makes it easy to build a world-class gaming system.
+ With excellent cooling from the dual 200mm fans, eight PCI-E expansion slots
+ to accommodate multiple graphics cards, and plenty of room for large,
+ power-hungry components, the Graphite Series 600T can handle just about
+ anything you can throw at it.
+", 10, "img/case/600t_silver_heroclosed.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components", "Graphite Series 780T White Full-Tower PC Case", 190, "
+    Maximum GPU Length: 355mm
+    Maximum CPU Cooler Height: 200mm
+    Maximum PSU Length: 260mm
+    Radiator Mount Locations:
+        Front: 360mm or 280mm
+        Top: 360mm or 280mm
+        Bottom: 240mm
+        Rear: 140mm
+", 10, "img/case/780T_White_01.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components", "Graphite Series 600T Mesh Mid-Tower Case", 180, "
+
+The Graphite Series 600T makes it easy to build a world-class gaming system. 
+With excellent cooling from the dual 200mm fans, eight PCI-E expansion slots to
+ accommodate multiple graphics cards, and plenty of room for large, power-hungry
+ components, the Graphite Series 600T can handle just about anything you can throw at it.
+", 10, "img/case/600tm_3qtr_up.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components", "Graphite Series 760T Full-Tower Windowed Case", 180, "
+    Gorgeous full panel window for maximum visibility of your internal components
+    Hinged side panels with quick release latches for easy access
+    Generous expansion room for building high-performance systems
+    Tool-free SSD, Hard Drive, and Optical Drive installation
+    Includes three AF140L fans, (front fans with red LEDs) with room for up to eight fans
+    Modular drive cage system for highly customizable layouts
+        Two modular drive cages house three 3.5” or 2.5” drives each
+        Four tool-free dedicated SSD cages, sideways mounted
+    Designed for fast and straightforward builds
+", 10, "img/case/760T_three_quarter_hero_low_blk.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components", "Graphite Series 780T Full-Tower PC Case", 180, "
+    Maximum GPU Length: 355mm
+    Maximum CPU Cooler Height: 200mm
+    Maximum PSU Length: 260mm
+    Radiator Mount Locations:
+        Front: 360mm or 280mm
+        Top: 360mm or 280mm
+        Bottom: 240mm
+        Rear: 140mm
+", 10, "img/case/780T_Black_001.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components", "Graphite Series 730T Full-Tower Case", 140, "
+    Hinged side panels with quick release latches for easy access
+    Generous expansion room for building high-performance systems
+    Tool-free SSD, Hard Drive, and Optical Drive installation
+    Includes three AF140L fans, (front fans with red LEDs) with room for up to eight fans
+    Modular drive cage system for highly customizable layouts
+        Two modular drive cages house three 3.5” or 2.5” drives each
+        Four tool-free dedicated SSD cages, sideways mounted
+    Designed for fast and straightforward builds
+
+", 10, "img/case/780T_Black_001.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components", "Graphite Series 230T Mid-Tower Case", 79, "
+    Maximum GPU Length: 355mm
+    Maximum CPU Cooler Height: 200mm
+    Maximum PSU Length: 260mm
+    Radiator Mount Locations:
+        Front: 360mm or 280mm
+        Top: 360mm or 280mm
+        Bottom: 240mm
+        Rear: 140mm
+", 10, "img/case/780T_Black_001.png", 1);
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components", "Graphite Series 230T Case Battleship", 79, "
+    Maximum GPU Length: 355mm
+    Maximum CPU Cooler Height: 200mm
+    Maximum PSU Length: 260mm
+    Radiator Mount Locations:
+        Front: 360mm or 280mm
+        Top: 360mm or 280mm
+        Bottom: 240mm
+        Rear: 140mm
+", 10, "img/case/780T_Black_001.png", 1);
+
+
+
+INSERT INTO products(producer_name, model_name, price, product_info, quantity, img_url, type_id)
+
+VALUES("Corsair Components", "Graphite Series 230T Compact Mid-Tower Case", 70, "
+    Maximum GPU Length: 355mm
+    Maximum CPU Cooler Height: 200mm
+    Maximum PSU Length: 260mm
+    Radiator Mount Locations:
+        Front: 360mm or 280mm
+        Top: 360mm or 280mm
+        Bottom: 240mm
+        Rear: 140mm
+", 10, "img/case/780T_Black_001.png", 1);
+
