@@ -12,8 +12,8 @@ public class Ram extends Product{
 	
 	
 	//Constructor:
-	public Ram (String producer, String model, double price, String info, int quantity, String ramType, int size) throws InvalidPriceException, InvalidQuantityException {
-		super(producer, model, price, info, quantity, Type.RAM);
+	public Ram (String producer, String model, double price, String info, int quantity, String img,String ramType, int size) throws InvalidPriceException, InvalidQuantityException {
+		super(producer, model, price, info, quantity, img,Type.RAM);
 		this.ramType = ramType;
 		this.size = size;
 	}	

@@ -11,8 +11,8 @@ public class Case extends Product{
 	
 	
 	//Constructor:
-	public Case(String producer, String model, double price, String info, int quantity, String form, String size) throws InvalidPriceException, InvalidQuantityException {
-		super(producer, model, price, info, quantity, Type.CASE);
+	public Case(String producer, String model, double price, String info, int quantity, String img,String form, String size) throws InvalidPriceException, InvalidQuantityException {
+		super(producer, model, price, info, quantity, img, Type.CASE);
 		this.form = form;
 		this.size = size;
 	}	

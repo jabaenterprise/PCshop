@@ -1,5 +1,7 @@
 function addAttribute(id){
-	document.getElementById(id).setAttribute("class", "active");
+	if(id!="none"){
+		document.getElementById(id).setAttribute("class", "active");
+	}
 }
 
 function setDisplay(className, isLogged){
@@ -24,4 +26,25 @@ function startRedirectTimer(){
 		return;
 	}
 	}, 1000);
+}
+
+function getSortType(selectId, category){
+	var sortType = document.getElementById(selectId).value;
+	window.location.href="index.jsp?category="+category+"&sortType="+sortType;
+	return;
+}
+
+function setSelected(option){
+	/*$("select option[value='"+option+"']").attr("selected","selected");*/
+	var select = document.getElementsByTagName("option");
+	if(option==="priceDescending"){
+		select[1].setAttribute("selected", true);
+	}else{
+		if(option==="producer"){
+			select[2].setAttribute("selected", true);
+		}else{
+			select[0].setAttribute("selected", true);
+		}
+	}
+		
 }

@@ -11,8 +11,8 @@ public class Cpu extends Product {
 	private String socket;
 	
 	//Constructor:
-	public Cpu(String producer, String model, double price, String info, int quantity, int numberOfCores, double clockSpeed, String socket) throws InvalidPriceException, InvalidQuantityException {
-		super(producer, model, price, info, quantity, Type.CPU);
+	public Cpu(String producer, String model, double price, String info, int quantity, String img ,int numberOfCores, double clockSpeed, String socket) throws InvalidPriceException, InvalidQuantityException {
+		super(producer, model, price, info, quantity, img, Type.CPU);
 		this.numberOfCores = numberOfCores;
 		this.clockSpeed = clockSpeed;
 		this.socket = socket;

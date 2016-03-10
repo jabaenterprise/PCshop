@@ -26,8 +26,8 @@ public class DBShopDAO implements IShopDAO {
 	public void addProductToShop(Product p) {
 		
 		String addType ="INSERT INTO IF NOT EXISTS pcshop.product_types (type_name) VALUES (?);";
-		String addProduct ="INSERT INTO pcshop.products (producer_name,model_name,price,product_info,quantity,type_id)"
-				+ "VALUES(?,?,?,?,?,SELECT type_id FROM pcshop.product_types WHERE type_name=?)";
+		String addProduct ="INSERT INTO pcshop.products (producer_name,model_name,price,product_info,quantity,img_url, type_id)"
+				+ "VALUES(?,?,?,?,?,?,SELECT type_id FROM pcshop.product_types WHERE type_name=?)";
 		
 		
 		
@@ -42,7 +42,8 @@ public class DBShopDAO implements IShopDAO {
 			prod.setDouble(3, p.getPrice());
 			prod.setString(4, p.getInfo());
 			prod.setInt(5, p.getQuantity());
-			prod.setString(6, p.getType().toString());
+			prod.setString(6, p.getImgUrl());
+			prod.setString(7, p.getType().toString());
 			prod.execute();
 			prod.close();
 			String forType = new String();
@@ -170,7 +171,7 @@ public class DBShopDAO implements IShopDAO {
 		try {
 			conn = DBManager.getDBManager().getConnection();
 			st = conn.createStatement();
-			ResultSet rs = st.executeQuery("SELECT product_id, producer_name, model_name, price, product_info, quantity_in_cart, type FROM pcshop.products WHERE producer='" + searchWord + "' OR model='" + searchWord + "';");
+			ResultSet rs = st.executeQuery("SELECT product_id, producer_name, model_name, price, product_info, quantity_in_cart,img_url, type FROM pcshop.products WHERE producer='" + searchWord + "' OR model='" + searchWord + "';");
 			Product pr = null;
 			int quantity = 0;
 			while(rs.next()) {
@@ -179,7 +180,8 @@ public class DBShopDAO implements IShopDAO {
 				String model = rs.getString("model_name");
 				double price = rs.getDouble("price");
 				quantity = rs.getInt("quantity_in_cart");
-				String info = rs.getString("product_info");		
+				String info = rs.getString("product_info");
+				String img = rs.getString("img_url");
 				String type = rs.getString("type");
 				ResultSet rs2 = null;
 				switch (type) {
@@ -188,7 +190,7 @@ public class DBShopDAO implements IShopDAO {
 					rs2.next();
 					String form = rs2.getString("case_form");
 					String size = rs2.getString("case_size");
-					pr = new Case(producer, model, price, info, quantity, form, size);
+					pr = new Case(producer, model, price, info, quantity, img, form, size);
 					break;
 				case "cpu": 
 					rs2 = st.executeQuery("SELECT number_of_cores, clock_speed, socket FROM pcshop.cpus WHERE product_id=" + productId + ";");
@@ -196,7 +198,7 @@ public class DBShopDAO implements IShopDAO {
 					int numberOfCores = rs2.getInt("number_of_cores");
 					double clockSpeed = rs2.getDouble("clock_speed");
 					String socket = rs2.getString("socket");
-					pr = new Cpu(producer, model, price, info, quantity, numberOfCores, clockSpeed, socket);
+					pr = new Cpu(producer, model, price, info, quantity, img, numberOfCores, clockSpeed, socket);
 					break;
 				case "gpu": 
 					rs2 = st.executeQuery("SELECT memory_size, output_interface, max_resolution FROM pcshop.gpus WHERE product_id=" + productId + ";");
@@ -204,7 +206,7 @@ public class DBShopDAO implements IShopDAO {
 					int memorySize = rs2.getInt("memory_size");
 					String maxResolution = rs2.getString("max_resolution");
 					String outputInterface = rs2.getString("output_interface");
-					pr = new Gpu(producer, model, price, info, quantity, memorySize, maxResolution, outputInterface);
+					pr = new Gpu(producer, model, price, info, quantity, img, memorySize, maxResolution, outputInterface);
 					break;
 				case "hd": 
 					rs2 = st.executeQuery("SELECT hd_type, drive_size, drive_capacity FROM pcshop.hard_drives WHERE product_id=" + productId + ";");
@@ -212,7 +214,7 @@ public class DBShopDAO implements IShopDAO {
 					String hdType = rs2.getString("hd_type");
 					int driveSize = rs2.getInt("drive_size");
 					int driveCapacity = rs2.getInt("drive_size");
-					pr = new HardDrive(producer, model, price, info, quantity, hdType, driveSize, driveCapacity);
+					pr = new HardDrive(producer, model, price, info, quantity, img,  hdType, driveSize, driveCapacity);
 					break;
 				case "mon": 
 					rs2 = st.executeQuery("SELECT screen_size, refresh_rate, matrix_type FROM pcshop.monitors WHERE product_id=" + productId + ";");
@@ -220,7 +222,7 @@ public class DBShopDAO implements IShopDAO {
 					double screenSize = rs2.getDouble("screen_size");
 					int refreshRate = rs2.getInt("refresh_rate");
 					String matrixType = rs2.getString("matrix_type");
-					pr = new Monitor(producer, model, price, info, quantity, screenSize, refreshRate, matrixType);
+					pr = new Monitor(producer, model, price, info, quantity, img, screenSize, refreshRate, matrixType);
 					break;
 				case "mb": 
 					rs2 = st.executeQuery("SELECT chipset, ram_slots, socket_type FROM pcshop.mother_boards WHERE product_id=" + productId + ";");
@@ -228,14 +230,14 @@ public class DBShopDAO implements IShopDAO {
 					String chipset = rs2.getString("case_form");
 					String ramSlots = rs2.getString("ram_slots");
 					String socketType = rs2.getString("socket_type");
-					pr = new MotherBoard(producer, model, price, info, quantity, chipset, ramSlots, socketType);
+					pr = new MotherBoard(producer, model, price, info, quantity, img, chipset, ramSlots, socketType);
 					break;
 				case "ram": 
 					rs2 = st.executeQuery("SELECT ram_type, ram_size FROM pcshop.rams WHERE product_id=" + productId + ";");
 					rs2.next();
 					String ramType = rs2.getString("ram_type");
 					int ramSize = rs2.getInt("ram_size");
-					pr = new Ram(producer, model, price, info, quantity, ramType, ramSize);
+					pr = new Ram(producer, model, price, info, quantity, img, ramType, ramSize);
 					break;
 				}
 							

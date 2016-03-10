@@ -66,48 +66,48 @@ public class ClientDAO implements IClientDAO {
 					rs3 = st.executeQuery("SELECT case_form, case_size FROM pcshop.cases WHERE product_id=" + productId + ";");
 					String form = rs3.getString("case_form");
 					String size = rs3.getString("case_size");
-					pr = new Case(producer, model, price, info, quantity, form, size);
+					pr = new Case(producer, model, price, info, quantity, "img",form, size);
 					break;
 				case "cpu": 
 					rs3 = st.executeQuery("SELECT number_of_cores, clock_speed, socket FROM pcshop.cpus WHERE product_id=" + productId + ";");
 					int numberOfCores = rs3.getInt("number_of_cores");
 					double clockSpeed = rs3.getDouble("clock_speed");
 					String socket = rs3.getString("socket");
-					pr = new Cpu(producer, model, price, info, quantity, numberOfCores, clockSpeed, socket);
+					pr = new Cpu(producer, model, price, info, quantity, "img",numberOfCores, clockSpeed, socket);
 					break;
 				case "gpu": 
 					rs3 = st.executeQuery("SELECT memory_size, output_interface, max_resolution FROM pcshop.gpus WHERE product_id=" + productId + ";");
 					int memorySize = rs3.getInt("memory_size");
 					String maxResolution = rs3.getString("max_resolution");
 					String outputInterface = rs3.getString("output_interface");
-					pr = new Gpu(producer, model, price, info, quantity, memorySize, maxResolution, outputInterface);
+					pr = new Gpu(producer, model, price, info, quantity,"img", memorySize, maxResolution, outputInterface);
 					break;
 				case "hd": 
 					rs3 = st.executeQuery("SELECT hd_type, drive_size, drive_capacity FROM pcshop.hard_drives WHERE product_id=" + productId + ";");
 					String hdType = rs3.getString("hd_type");
 					int driveSize = rs3.getInt("drive_size");
 					int driveCapacity = rs3.getInt("drive_size");
-					pr = new HardDrive(producer, model, price, info, quantity, hdType, driveSize, driveCapacity);
+					pr = new HardDrive(producer, model, price, info, quantity, "img",hdType, driveSize, driveCapacity);
 					break;
 				case "mon": 
 					rs3 = st.executeQuery("SELECT screen_size, refresh_rate, matrix_type FROM pcshop.monitors WHERE product_id=" + productId + ";");
 					double screenSize = rs3.getDouble("screen_size");
 					int refreshRate = rs3.getInt("refresh_rate");
 					String matrixType = rs3.getString("matrix_type");
-					pr = new Monitor(producer, model, price, info, quantity, screenSize, refreshRate, matrixType);
+					pr = new Monitor(producer, model, price, info, quantity, "img",screenSize, refreshRate, matrixType);
 					break;
 				case "mb": 
 					rs3 = st.executeQuery("SELECT chipset, ram_slots, socket_type FROM pcshop.mother_boards WHERE product_id=" + productId + ";");
 					String chipset = rs3.getString("case_form");
 					String ramSlots = rs3.getString("ram_slots");
 					String socketType = rs3.getString("socket_type");
-					pr = new MotherBoard(producer, model, price, info, quantity, chipset, ramSlots, socketType);
+					pr = new MotherBoard(producer, model, price, info, quantity,"img", chipset, ramSlots, socketType);
 					break;
 				case "ram": 
 					rs3 = st.executeQuery("SELECT ram_type, ram_size FROM pcshop.rams WHERE product_id=" + productId + ";");
 					String ramType = rs3.getString("ram_type");
 					int ramSize = rs3.getInt("ram_size");
-					pr = new Ram(producer, model, price, info, quantity, ramType, ramSize);
+					pr = new Ram(producer, model, price, info, quantity, "img",ramType, ramSize);
 					break;
 				}
 							

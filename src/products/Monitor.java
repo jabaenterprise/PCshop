@@ -12,8 +12,8 @@ public class Monitor extends Product{
 	
 	
 	//Constructor:
-	public Monitor(String producer, String model, double price, String info, int quantity, double size, int refreshRate, String matrixType) throws InvalidPriceException, InvalidQuantityException {
-		super(producer, model, price, info, quantity, Type.MON);
+	public Monitor(String producer, String model, double price, String info, int quantity, String img,double size, int refreshRate, String matrixType) throws InvalidPriceException, InvalidQuantityException {
+		super(producer, model, price, info, quantity, img,Type.MON);
 		this.size = size;
 		this.refreshRate = refreshRate;
 		this.matrixType = matrixType;

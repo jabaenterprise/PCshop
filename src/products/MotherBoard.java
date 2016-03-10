@@ -12,8 +12,8 @@ public class MotherBoard extends Product{
 	
 		
 	//Constructor:
-	public MotherBoard(String producer, String model, double price, String info, int quantity, String chipset, String ramSlots, String socketType) throws InvalidPriceException, InvalidQuantityException {
-		super(producer, model, price, info, quantity, Type.MB);
+	public MotherBoard(String producer, String model, double price, String info, int quantity, String img,String chipset, String ramSlots, String socketType) throws InvalidPriceException, InvalidQuantityException {
+		super(producer, model, price, info, quantity, img,Type.MB);
 		this.chipset = chipset;
 		this.ramSlots = ramSlots;
 		this.socketType = socketType;

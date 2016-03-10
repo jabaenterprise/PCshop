@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="database.daos.DBProductsDAO"%>
+<%@page import="products.Product"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -128,6 +131,18 @@ details > summary::-webkit-details-marker {
 }
 </style>
 </head>
+
+<%
+	int id = Integer.parseInt(request.getParameter("productId"));
+	Product product = new DBProductsDAO().getProductById(id);
+	if(product==null){
+		response.sendRedirect("index.jsp");
+		return;
+	}
+//	print product
+
+%>
+
 <body>
 <div id = "wrapper">
 	<div id = "header" >
@@ -149,7 +164,7 @@ details > summary::-webkit-details-marker {
   </figure>
  
   <section>
- 
+ <%=product.toString() %>
   <p>Enjoy overclocked graphics on your gaming PC with the Asus 2 GB GeForce GTX 750 Ti PCIe Graphics Card. Boasting dual fan cooling, GPU Tweak technology and 3D capabilities, you can expect a lot from this graphics card. It is overclocked for performance that's up to 52 MHz faster than reference so you can get the best from your favourite games.</p>
  
   <details>

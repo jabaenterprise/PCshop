@@ -16,15 +16,16 @@ public abstract class Product {
 	private int quantity;
 	private boolean isAvailable;
 	private Type type; 
-		
+	private String imgUrl;
 
 	
 	//Constructor:
-	public Product(String producer, String model, double price, String info, int quantity, Type type) throws InvalidPriceException, InvalidQuantityException {
+	public Product(String producer, String model, double price, String info, int quantity, String imgUrl,Type type) throws InvalidPriceException, InvalidQuantityException {
 		this.producer = producer;
 		this.model = model;
 		this.info = info;
 		this.type = type;
+		this.setImgUrl(imgUrl);
 		if (price > 0) {
 			this.price = price;
 		} else {
@@ -66,7 +67,7 @@ public abstract class Product {
 	public String getInfo() {
 		return info;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -74,6 +75,7 @@ public abstract class Product {
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 	//Setters: - only the one needed!
  	public void setQuantity(int newQuantity) throws InvalidQuantityException {
@@ -140,6 +142,18 @@ public abstract class Product {
 		} else {
 			throw new NotEnoughInStockException("Sorry, but the shop doesn't have " + amount + " " + this.producer + " " + this.model + " in stock at this moment.");
 		}
+	}
+
+
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 	
 		

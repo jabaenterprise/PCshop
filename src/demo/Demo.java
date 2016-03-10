@@ -18,8 +18,8 @@ public class Demo {
 	public static void main(String[] args) throws InvalidPriceException, InvalidQuantityException {
 
 		Shop emag =  Shop.getShop();
-		Product p = new Cpu("", "",10,  "",5,  5, 5, "");
-		Product p2 = new Ram("", "",5,  "",5,  "", 5);
+		Product p = new Cpu("", "",10,  "",5,  "", 5, 5,"");
+		Product p2 = new Ram("", "",5,  "",5,  "", "", 5);
 		emag.addProductToShop(p);
 		emag.addProductToShop(p);
 		emag.addProductToShop(p2);

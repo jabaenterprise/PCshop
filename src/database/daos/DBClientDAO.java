@@ -48,9 +48,9 @@ public class DBClientDAO implements IClientDAO {
 			client = new Client(firstName, familyName, eMail, password, city, address);
 			client.setUserId(userId);
 			client.setPhoneNumber(phoneNumber);
-			client.addMoneyToAccount(money);
+			client.addMoneyToAccount(money);;
 			
-			ResultSet rs2 = st.executeQuery("SELECT product_id, producer_name, model_name, price, product_info, quantity_in_cart, type FROM pcshop.products_in_carts JOIN pcshop.products ON (pcshop.products_in_cart.product_id=pcshop.products.product_id) JOIN pcshop.product_types ON (pcshop.products.type_id=pcshop.product_types.type_id) WHERE user_id=" + userId + ";");
+			ResultSet rs2 = st.executeQuery("SELECT product_id, producer_name, model_name, price, product_info, quantity_in_cart, img_url, type FROM pcshop.products_in_carts JOIN pcshop.products ON (pcshop.products_in_cart.product_id=pcshop.products.product_id) JOIN pcshop.product_types ON (pcshop.products.type_id=pcshop.product_types.type_id) WHERE user_id=" + userId + ";");
 			Product pr = null;
 			int quantity = 0;
 			while(rs2.next()) {
@@ -59,7 +59,8 @@ public class DBClientDAO implements IClientDAO {
 				String model = rs2.getString("model_name");
 				double price = rs2.getDouble("price");
 				quantity = rs2.getInt("quantity_in_cart");
-				String info = rs2.getString("product_info");		
+				String info = rs2.getString("product_info");
+				String img = rs2.getString("url_img");
 				String type = rs2.getString("type");
 				ResultSet rs3 = null;
 				switch (type) {
@@ -68,7 +69,7 @@ public class DBClientDAO implements IClientDAO {
 					rs3.next();
 					String form = rs3.getString("case_form");
 					String size = rs3.getString("case_size");
-					pr = new Case(producer, model, price, info, quantity, form, size);
+					pr = new Case(producer, model, price, info, quantity, img, form, size);
 					pr.setId(productId);
 					break;
 				case "cpu": 
@@ -77,7 +78,7 @@ public class DBClientDAO implements IClientDAO {
 					int numberOfCores = rs3.getInt("number_of_cores");
 					double clockSpeed = rs3.getDouble("clock_speed");
 					String socket = rs3.getString("socket");
-					pr = new Cpu(producer, model, price, info, quantity, numberOfCores, clockSpeed, socket);
+					pr = new Cpu(producer, model, price, info, quantity, img, numberOfCores, clockSpeed, socket);
 					pr.setId(productId);
 					break;
 				case "gpu": 
@@ -86,7 +87,7 @@ public class DBClientDAO implements IClientDAO {
 					int memorySize = rs3.getInt("memory_size");
 					String maxResolution = rs3.getString("max_resolution");
 					String outputInterface = rs3.getString("output_interface");
-					pr = new Gpu(producer, model, price, info, quantity, memorySize, maxResolution, outputInterface);
+					pr = new Gpu(producer, model, price, info, quantity, img, memorySize, maxResolution, outputInterface);
 					pr.setId(productId);
 					break;
 				case "hd": 
@@ -95,7 +96,7 @@ public class DBClientDAO implements IClientDAO {
 					String hdType = rs3.getString("hd_type");
 					int driveSize = rs3.getInt("drive_size");
 					int driveCapacity = rs3.getInt("drive_size");
-					pr = new HardDrive(producer, model, price, info, quantity, hdType, driveSize, driveCapacity);
+					pr = new HardDrive(producer, model, price, info, quantity, img, hdType, driveSize, driveCapacity);
 					pr.setId(productId);
 					break;
 				case "mon": 
@@ -104,7 +105,7 @@ public class DBClientDAO implements IClientDAO {
 					double screenSize = rs3.getDouble("screen_size");
 					int refreshRate = rs3.getInt("refresh_rate");
 					String matrixType = rs3.getString("matrix_type");
-					pr = new Monitor(producer, model, price, info, quantity, screenSize, refreshRate, matrixType);
+					pr = new Monitor(producer, model, price, info, quantity, img, screenSize, refreshRate, matrixType);
 					pr.setId(productId);
 					break;
 				case "mb": 
@@ -113,7 +114,7 @@ public class DBClientDAO implements IClientDAO {
 					String chipset = rs3.getString("case_form");
 					String ramSlots = rs3.getString("ram_slots");
 					String socketType = rs3.getString("socket_type");
-					pr = new MotherBoard(producer, model, price, info, quantity, chipset, ramSlots, socketType);
+					pr = new MotherBoard(producer, model, price, info, quantity, img, chipset, ramSlots, socketType);
 					pr.setId(productId);
 					break;
 				case "ram": 
@@ -121,7 +122,7 @@ public class DBClientDAO implements IClientDAO {
 					rs3.next();
 					String ramType = rs3.getString("ram_type");
 					int ramSize = rs3.getInt("ram_size");
-					pr = new Ram(producer, model, price, info, quantity, ramType, ramSize);
+					pr = new Ram(producer, model, price, info, quantity, img, ramType, ramSize);
 					pr.setId(productId);
 					break;
 				}
@@ -148,8 +149,6 @@ public class DBClientDAO implements IClientDAO {
 		return client;
 		
 	}
-
-	
 	
 	@Override
 	public HashSet<String> getClientEmails() {
@@ -176,14 +175,8 @@ public class DBClientDAO implements IClientDAO {
 			}
 		}
 		
-		
-		
 		return eMails;
 	}
-
-
-
-	
 	
 	@Override
 	public HashMap<String, String> getEMailsAndPasswords() {
@@ -216,8 +209,5 @@ public class DBClientDAO implements IClientDAO {
 		
 		return eMailsAndPasswords;
 	}
-
-	
-	
 	
 }

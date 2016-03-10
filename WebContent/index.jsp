@@ -1,8 +1,11 @@
 <%@page import="database.daos.DBProductsDAO"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="client.Client"%>
+<%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="products.Product"%>
+<%@page import="products.ProductIDEntry"%>
+
 
 
 
@@ -18,9 +21,9 @@
 </head>
 
 <%
-//products url
 //searchServlet
-//sortServlet
+//sortServlet or jsp???
+//refactoring		
 	if (session.isNew()) {
 		session.setAttribute("isLogged", false);
 		session.setAttribute("pageId", 1);
@@ -37,72 +40,44 @@
 	if (category == null) {
 		category = "none";
 	}
+	String sortType = request.getParameter("sortType");
+	if(sortType == null){
+		sortType = "priceAscending";
+	}
+	
+	
 %>
-<body onload='addAttribute("<%=category%>")'>
-
+<body onload='addAttribute("<%=category%>");setSelected("<%=sortType%>");'>
 	<%
 		String pageS = (String) request.getParameter("pageId");
 		int pageId = 1;
 		if (pageS != null) {
 			pageId = Integer.parseInt(pageS);
-		} //List<String> products = DBProductsDAO.getProducts(category);
-		List<String> products = new ArrayList();
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-		products.add("img/PCShop_logo.png");
-
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-		products.add("");
-
+		} 
+		
+		List<ProductIDEntry> products = new DBProductsDAO().getAllProducts(category, sortType);
 		int maxPage = 1;
-		if (products.size() % 12 != 0) {
-			maxPage = products.size() / 12 + 1;
-		} else {
-			maxPage = products.size() / 12;
+		if(products.size()>0){
+			if (products.size() % 12 != 0) {
+				maxPage = products.size() / 12 + 1;
+			} else {
+				maxPage = products.size() / 12;
+			}
+		
+			if(pageId>maxPage){
+				String link = "index.jsp?category="+category+"&sortType=" +sortType+"&pageId=" + maxPage;
+				response.sendRedirect(link);
+			}
+		}else{
+			pageId = 1;
 		}
-		int prevPage = pageId - 1;
-		int nextPage = pageId + 1;
+			int prevPage = pageId - 1;
+			int nextPage = pageId + 1;
+		
+	
+		String pages =  "MaxPage:"+maxPage + "pageId: " + pageId;
 	%>
-
+<%=pages %>
 	<div id="container">
 		<div id="logo">
 			<a href="index.jsp"> <img src="img/PCShop_logo.png" />
@@ -167,12 +142,12 @@
 
 			<div id="product-container">
 				<div id="sort">
-					<select>
-						<option value="Sort by price(Ascending)">Sort by
+					<select id="selectSort" onchange='getSortType("selectSort", "<%=category%>")'>
+						<option value="priceAscending">Sort by
 							price(Ascending)</option>
-						<option value="Sort by price(Descending)">Sort by
+						<option value="priceDescending">Sort by
 							price(Descending)</option>
-						<option value="Sort by producers">Sort by producers</option>
+						<option value="producer">Sort by producers</option>
 					</select>
 				</div>
 
@@ -180,14 +155,14 @@
 					<%
 						int start = 12 * (pageId - 1);
 						int end = 12 * pageId;
-						if (pageId == maxPage) {
+						if (pageId >= maxPage) {
 							end = products.size();
 						}
 						for (int i = start; i < end; i++) {
 					%>
 					<div id="product">
 					<!-- must be implemented -->
-						<a href="productInfo.jsp?productId="> <img src="<%=products.get(i)%>" /></a>
+						<a href="productInfo.jsp?productId=<%=products.get(i).getId()%>"> <img src="<%=products.get(i).getProduct().getImgUrl()%>" /></a>
 						<button class="buy1" id="buy">BUY</button>
 					</div>
 					<%	
@@ -201,7 +176,7 @@
 						<%
 							if (prevPage >= 1) {
 						%>
-						<a href="index.jsp?category=<%=category%>&pageId=<%=prevPage%>">Prev</a>
+						<a href="index.jsp?category=<%=category%>&sortType=<%=sortType%>&pageId=<%=prevPage%>">Prev</a>
 						<%
 							}
 						%>
@@ -209,7 +184,7 @@
 						<%
 							if (nextPage <= maxPage) {
 						%>
-						<a href="index.jsp?category=<%=category%>&pageId=<%=nextPage%>">Next</a>
+						<a href="index.jsp?category=<%=category%>&sortType=<%=sortType%>&pageId=<%=nextPage%>">Next</a>
 						<%
 							}
 						%>
