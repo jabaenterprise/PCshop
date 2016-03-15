@@ -1,0 +1,4 @@
+INSERT INTO ecommerce.clients (first_name, family_name, email, password, address, phone, money) VALUES ('Petar', 'Vasilev', 'vasilev@abv.bg', '123', 'Sofia, bul. Patriarh Evtimii 23, et 1', '0897654342', 1234);
+INSERT INTO ecommerce.clients (first_name, family_name, email, password, address, phone, money) VALUES ('Maria', 'Donkova', 'donkova@abv.bg', '123', 'Sofia, bul. Praga 48, et 3', '0894434342', 2234);
+INSERT INTO ecommerce.clients (first_name, family_name, email, password, address, phone, money) VALUES ('Sonia', 'Borisova', 'borisova@abv.bg', '123', 'Sofia, ul. Oborishte 66, et 2', '0878654112', 534);
+INSERT INTO ecommerce.clients (first_name, family_name, email, password, address, phone, money) VALUES ('Valeri', 'Nikodimov', 'nikodimov@abv.bg', '123', 'Sofia, ul. Aton, bl. 32, et. 7, ap. 13', '0894454112', 10034);

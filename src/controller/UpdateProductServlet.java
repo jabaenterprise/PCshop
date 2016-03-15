@@ -1,14 +1,15 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.daos.DBProductsDAO;
-import products.Product;
+import database.dao.DBProductDAO;
+import model.Product;
 
 /**
  * Servlet implementation class UpdateProductServlet
@@ -21,7 +22,7 @@ public class UpdateProductServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Product pr = (Product) (request.getSession().getAttribute("FoundProduct"));
-		DBProductsDAO prdao = new DBProductsDAO();
+		DBProductDAO prdao = DBProductDAO.getDBProductDAO();
 		String newPriceString = request.getParameter("price");
 		String newQuantityString = request.getParameter("quantity");
 		//It needs a chech if the request parameters ar not valid numbers (contain other symbols)!!!
