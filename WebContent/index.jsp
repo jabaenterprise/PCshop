@@ -1,134 +1,83 @@
-<%@page import="database.daos.DBProductsDAO"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="client.Client"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.List"%>
-<%@page import="products.Product"%>
-<%@page import="products.ProductIDEntry"%>
+		<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<jsp:include page="init.jsp"></jsp:include>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>PCShop</title>
-<link rel="stylesheet" type="text/css" href="style/homepage.css" />
-<script src="javascript/functions.js"></script>
-</head>
+	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Insert title here</title>
+		<script src="javascript/functions.js"></script>
+	</head>
 
-<%
-//searchServlet
-//sortServlet or jsp???
-//refactoring		
-	if (session.isNew()) {
-		session.setAttribute("isLogged", false);
-		session.setAttribute("pageId", 1);
-	}
-	Client client = (Client) session.getAttribute("client");
-	if(client==null){
-		session.setAttribute("isLogged", false);
-	}
-	
-	boolean isLogged = (boolean) session.getAttribute("isLogged");
-	//isLogged = true;
+<body onload='setCurrentCategory("<c:out value="${requestScope.category}"></c:out>");setSelectedSortType("<c:out value="${requestScope.sortType}"></c:out>");'>
 
-	String category = request.getParameter("category");
-	if (category == null) {
-		category = "none";
-	}
-	String sortType = request.getParameter("sortType");
-	if(sortType == null){
-		sortType = "priceAscending";
-	}
+
+							<%-- LOGO --%>
+	<div id="logo">
+			<a href="index.jsp"><img src="img/PCSHOP.png" /></a>
+	</div>
+	
+		
+							<%-- USER --%>
+	<div>
+	
+	<c:if test="${sessionScope.is_admin == true}">
+		<h4 style=color:green>Hello, Admin!</h4>
+		<a href="LogoutServlet">Logout</a>
+	</c:if>
 	
 	
-%>
-<body onload='addAttribute("<%=category%>");setSelected("<%=sortType%>");'>
-	<%
-		String pageS = (String) request.getParameter("pageId");
-		int pageId = 1;
-		if (pageS != null) {
-			pageId = Integer.parseInt(pageS);
-		} 
-		
-		List<ProductIDEntry> products = new DBProductsDAO().getAllProducts(category, sortType);
-		int maxPage = 1;
-		if(products.size()>0){
-			if (products.size() % 12 != 0) {
-				maxPage = products.size() / 12 + 1;
-			} else {
-				maxPage = products.size() / 12;
-			}
-		
-			if(pageId>maxPage){
-				String link = "index.jsp?category="+category+"&sortType=" +sortType+"&pageId=" + maxPage;
-				response.sendRedirect(link);
-			}
-		}else{
-			pageId = 1;
-		}
-			int prevPage = pageId - 1;
-			int nextPage = pageId + 1;
-		
-	
-		String pages =  "MaxPage:"+maxPage + "pageId: " + pageId;
-	%>
-<%=pages %>
-	<div id="container">
-		<div id="logo">
-			<a href="index.jsp"> <img src="img/PCShop_logo.png" />
-			</a>
-		</div>
-		<div id="search" action="SearchServlet" method="get">
-			<form id="search">
-				<input type="text" placeholder="search" name="search" /> <input
-					type="submit" value="" />
-			</form>
-		</div>
-		<%
-			if (!isLogged) {
-		%>
-		<div id="login">
-			<form action="LoginServlet" method="post">
-				<label for="email">Email</label> <input id="email" type="text"
-					placeholder="email" name="emailLogin" /><br /> <label
-					for="password">Password</label> <input id="password"
-					type="password" placeholder="password" name="passwordLogin" /><br />
-				<input type="submit" value="Login" />
-			</form>
-		</div>
+	<c:if test="${sessionScope.client == null && sessionScope.is_admin != true}">
+							<%-- REGISTER --%>
 		<div id="register">
-			<span> or <a href="Register.html">Register</a></span>
+				<a href="register.jsp">register</a>
 		</div>
-		<%
-			} else {
-				String name = "";
-				if(client!=null){
-					name = client.getFirstName() + " " + client.getLastName();
-				}
-		%>
-		<p id="userName">
-			Hello,<%=name%>. You can
-		</p>
-		<div id="logout">
-			<form action="LogoutServlet" method="POST">
-				<input type="submit" value="Logout" />
-			</form>
+		
+							<%-- LOGIN --%>
+		<div id="login">
+				<form action="LoginServlet" method="POST">
+					<label for="email">e-mail:</label> 
+					<input id="email" type="text" name="email" />
+			  		<label for="password">password:</label> 
+					<input id="password" type="password" name="password" />
+			  		<input type="submit" value="Login" />
+				</form>
 		</div>
-
+		<c:if test="${requestScope.no_such_client == true}">
+			<h4 style=color:red>No client with such email or/and password!</h4>
+		</c:if>
+		
+	</c:if>
+	
+	
+	<c:if test="${sessionScope.client != null}">
+						<%-- LOGOUT --%>
+		<div id="logout" style=color:green>
+				<c:out value="Hello, ${sessionScope.client.firstName} ${sessionScope.client.familyName}!"></c:out>
+				<a href="LogoutServlet">Logout</a>
+		</div>
+						<%-- TO PROFILE --%>
+		<div id="to_profile" style=color:green>
+				<a href="client.jsp">To profile</a>
+		</div>
+		
 		<div id="cart">
-			<span> or <a href="UserPageAndCart.html">Cart</a></span>
+			<span> or <a href="CartAndUser.jsp">Cart</a></span>
 		</div>
-		<%
-			}
-		%>
-		<div id="main">
-			<div id="categories">
-				<span>Categories</span>
+		
+		
+	</c:if>
+	
+	</div>
+	
+	
+	
+						<%-- CATEGORIES --%>
+	<div id="categories" style=color:blue>
+				<h3>Categories:</h3>
 				<ul>
 					<li><a id="case" href="index.jsp?category=case">Case</a></li>
 					<li><a id="cpu" href="index.jsp?category=cpu">CPU</a></li>
@@ -138,60 +87,73 @@
 					<li><a id="mb" href="index.jsp?category=mb">Mother Board</a></li>
 					<li><a id="ram" href="index.jsp?category=ram">RAM</a></li>
 				</ul>
-			</div>
+	</div>
 
-			<div id="product-container">
+
+						<%-- PRODUCT CONTAINER --%>
+	<div id="product-container">
+				<h3 style=color:red>Products:</h3>
+						
+						
+						<%-- SEARCH --%>
+			<div id="search" >
+					<form action="SearchServlet" method="GET">
+						<input type="text" name="search_word" />
+						<input type="submit" value="search" />
+					</form>
+			</div>		
+											
+						
+						<%-- SORT --%>
+				<!-- <div id="sort">
+					<form action="SortingServlet" method="GET">
+						<select name="sort_type">
+							<option value="priceAsc">sort by price(asc)</option>
+							<option value="priceDesc">sort by price(desc)</option>
+							<option value="producer">sort by producer</option>
+						</select>
+						<input type="submit" value="sort">
+					</form>
+				</div>-->
+				
 				<div id="sort">
-					<select id="selectSort" onchange='getSortType("selectSort", "<%=category%>")'>
-						<option value="priceAscending">Sort by
-							price(Ascending)</option>
-						<option value="priceDescending">Sort by
-							price(Descending)</option>
+					<select id="selectSort" onchange='getSelectedSortType("selectSort", "<c:out value="${requestScope.category}"></c:out>")'>
+						<option value="priceAscending">Sort by price(Ascending)</option>
+						<option value="priceDescending">Sort by price(Descending)</option>
 						<option value="producer">Sort by producers</option>
 					</select>
 				</div>
+				
 
-				<div id="product-grid">
-					<%
-						int start = 12 * (pageId - 1);
-						int end = 12 * pageId;
-						if (pageId >= maxPage) {
-							end = products.size();
-						}
-						for (int i = start; i < end; i++) {
-					%>
-					<div id="product">
-					<!-- must be implemented -->
-						<a href="productInfo.jsp?productId=<%=products.get(i).getId()%>"> <img src="<%=products.get(i).getProduct().getImgUrl()%>" /></a>
-						<button class="buy1" id="buy">BUY</button>
-					</div>
-					<%	
-						}
-					%>
-					<script>
-					var isLogged = <%=isLogged%>;
-					setDisplay("buy1", isLogged);
-					</script>
+						<%-- PRODUCTS TABLE --%>
+				<table border=1>
+				<c:forEach var="product" items="${sessionScope.products}"> <%-- when you select category or search in the servelt this attribute is set (a collection) --%>
+					<c:set var="selected_product" value="${product}" scope="request"/> <%-- session keeps the last selected product --%>
+						<tr>
+							<td>
+								<%@ include file="product.jsp" %>
+							</td>
+						</tr>
+				</c:forEach>
+				</table>
+
 					<div id="pages">
-						<%
-							if (prevPage >= 1) {
-						%>
-						<a href="index.jsp?category=<%=category%>&sortType=<%=sortType%>&pageId=<%=prevPage%>">Prev</a>
-						<%
-							}
-						%>
-						<p><%=pageId%></p>
-						<%
-							if (nextPage <= maxPage) {
-						%>
-						<a href="index.jsp?category=<%=category%>&sortType=<%=sortType%>&pageId=<%=nextPage%>">Next</a>
-						<%
-							}
-						%>
-					</div>
-				</div>
-			</div>
-		</div>
+						<c:if test="${requestScope.hasPrev}">
+							<a
+								href="index.jsp?<c:out value="${requestScope.prevQueryString}"></c:out>">Prev</a>
+						</c:if>
+						<p>
+							<c:out value="${requestScope.pageId}"></c:out>
+						</p>
+						<c:if test="${requestScope.hasNext}">
+							<a
+								href="index.jsp?<c:out value="${requestScope.nextQueryString}"></c:out>">Next</a>
+						</c:if>
+					</div>				
+						
+				
 	</div>
+
+
 </body>
 </html>

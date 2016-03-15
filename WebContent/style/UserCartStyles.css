@@ -1,11 +1,11 @@
 @CHARSET "UTF-8";
-body { overflow-y: scroll; padding-left: 100px;padding-right: 100px; margin: 0; font-family: Calibri, sans-serif; font-size: 20px;font-weight: bold; color: #555; height: 2000px;}
+ body{overflow-y: scroll; padding-left: 100px;padding-right: 100px;background-color:#614051;margin:0px auto; font-family: Calibri, sans-serif; font-size: 20px;font-weight: bold; color: #555; height: 2000px;}
 nav{border-radius: 10px; width:100%; overflow: auto; min-width:1406px; max-width: 1406px}
-.minus{ width: 50px; height: 45px; float: right;border: solid; font-size: 25px; border-radius: 10px;}
+.minus{ width: 30px; height: 45px; float: right;border: none; font-size: 25px; border-radius: 10px;}
 
-.add{width: 50px; height: 45px; float: left; border: solid;font-size: 25px;  border-radius: 10px;}
+.add{width: 30px; height: 45px; float: left; border: none;font-size: 25px;  border-radius: 10px;}
 
-.qty{width: 50px; height: 20px; margin-left: 7px ;margin-right: 3px ;border: solid;  border-radius: 10px;}
+.qty{width: 30px; height: 20px; margin-left: 3px ;margin-right: 3px ;border: none;  border-radius: 10px;}
 
 .price{width: 100px; height: 20px; position: right;  }
 .minus:HOVER{
@@ -23,10 +23,10 @@ table {
 	 
 table td { overflow: hidden;  border-radius: 10px; text-align: center;}
 
-table td:nth-of-type(5) {min-width: 190px;max-width: 190px;}/*Setting the width of column 5.*/
+table td:nth-of-type(6) {min-width: 200px;max-width: 200px;}/*Setting the width of column 5.*/
+table th:nth-of-type(6) {min-width: 200px;max-width: 200px;}/*Setting the width of column 5.*/
 
-
-tr{background-color: #79d0ff ;	size:auto; empty-cells: hide;}
+tr{background-color: #79d0ff  ;	size:auto; empty-cells: hide;}
 th {
     background-color: #000000;
     color: white;
@@ -58,7 +58,7 @@ li a:hover {
 } 
 input  {
 	padding: 10px;
-	border: 1px solid;
+	border: 1px none;
 	width: 250px;
 	color:  #b3b3b3;
 	border-radius: 3px;
@@ -71,6 +71,7 @@ input  {
 	-o-box-shadow: 0px 0px 3px 3px #f2f2f2;
 	font-size: 17px;
 }
+
 .submit input {
 	width: 100px;
 	height: 40px;
@@ -115,7 +116,7 @@ h1 {
 	 max-width:1200px;
 	 background: #e5f6ff;
 	 border-radius: 10px;
-	 border: 2px solid #fff;
+	 border: none;
 	
 }
 :invalid {
@@ -147,7 +148,7 @@ button {
 	  background: -ms-linear-gradient(top, #36a9ea 0%,#127fd2 100%);
 	  background: linear-gradient(top, #36a9ea 0%,#127fd2 100%);
 	  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#36a9ea', endColorstr='#127fd2',GradientType=0 );
-	  border: 1px solid #00599d;
+	  border: none;
 	  color: #fff;
 	  padding: 8px 20px;
 	  -webkit-border-radius: 6px;

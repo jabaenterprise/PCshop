@@ -1,9 +1,11 @@
-function addAttribute(id){
+/*used*/
+function setCurrentCategory(id){
 	if(id!="none"){
 		document.getElementById(id).setAttribute("class", "active");
 	}
 }
 
+/*not used*/
 function setDisplay(className, isLogged){
 	var elements = document.getElementsByClassName(className);
 	for(var i = 0; i<elements.length; i++){
@@ -14,7 +16,7 @@ function setDisplay(className, isLogged){
 		}
 	}
 }
-
+/*not used*/
 function startRedirectTimer(){
 	var second = 5;
 	var counter = setInterval(function(){
@@ -28,13 +30,14 @@ function startRedirectTimer(){
 	}, 1000);
 }
 
-function getSortType(selectId, category){
+/*used*/
+function getSelectedSortType(selectId, category){
 	var sortType = document.getElementById(selectId).value;
 	window.location.href="index.jsp?category="+category+"&sortType="+sortType;
 	return;
 }
-
-function setSelected(option){
+/*used*/
+function setSelectedSortType(option){
 	/*$("select option[value='"+option+"']").attr("selected","selected");*/
 	var select = document.getElementsByTagName("option");
 	if(option==="priceDescending"){
@@ -46,5 +49,5 @@ function setSelected(option){
 			select[0].setAttribute("selected", true);
 		}
 	}
-		
 }
+
