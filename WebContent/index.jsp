@@ -1,10 +1,10 @@
-<%@page import="database.daos.DBProductsDAO"%>
+<%@page import="database.dao.DBProductDAO"%>
 <%@page import="java.sql.DriverManager"%>
-<%@page import="client.Client"%>
+<%@page import="model.Client"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
-<%@page import="products.Product"%>
-<%@page import="products.ProductIDEntry"%>
+<%@page import="model.Product"%>
+<%@page import="model.ProductIDEntry"%>
 
 
 
@@ -55,7 +55,7 @@
 			pageId = Integer.parseInt(pageS);
 		} 
 		
-		List<ProductIDEntry> products = new DBProductsDAO().getAllProducts(category, sortType);
+		List<Product> products = DBProductDAO.getDBProductDAO().getAllProducts();
 		int maxPage = 1;
 		if(products.size()>0){
 			if (products.size() % 12 != 0) {
@@ -102,13 +102,13 @@
 			</form>
 		</div>
 		<div id="register">
-			<span> or <a href="Register.html">Register</a></span>
+			<span> or <a href="register.jsp">Register</a></span>
 		</div>
 		<%
 			} else {
 				String name = "";
 				if(client!=null){
-					name = client.getFirstName() + " " + client.getLastName();
+					name = client.getFirstName() + " " + client.getFamilyName();
 				}
 		%>
 		<p id="userName">
@@ -121,7 +121,7 @@
 		</div>
 
 		<div id="cart">
-			<span> or <a href="UserPageAndCart.html">Cart</a></span>
+			<span> or <a href="CartAndUser.jsp">Cart</a></span>
 		</div>
 		<%
 			}
@@ -159,10 +159,11 @@
 							end = products.size();
 						}
 						for (int i = start; i < end; i++) {
+							out.print(products.get(i).getId());
 					%>
 					<div id="product">
 					<!-- must be implemented -->
-						<a href="productInfo.jsp?productId=<%=products.get(i).getId()%>"> <img src="<%=products.get(i).getProduct().getImgUrl()%>" /></a>
+						<a href="ShowInfo?productId=<%=products.get(i).getId()%>"> <img src="<%=products.get(i).getImageUrl()%>" /></a>
 						<button class="buy1" id="buy">BUY</button>
 					</div>
 					<%	

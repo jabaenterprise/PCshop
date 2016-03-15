@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="database.daos.DBProductsDAO"%>
-<%@page import="products.Product"%>
+<%@page import="database.dao.DBProductDAO"%>
+<%@page import="model.Product"%>
 <%@page import="java.util.List"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -52,7 +53,7 @@ header {
 }
 header {
   margin-bottom: 20px;
-  background: url('http://iconshow.me/media/images/logo/brand-logo-icon/png/256/asus-256.png') no-repeat right center; 
+ <!-- background: url('http://iconshow.me/media/images/logo/brand-logo-icon/png/256/asus-256.png') no-repeat right center; --> 
 }
 figure {
   float: left;
@@ -117,14 +118,14 @@ details > summary:before {
   height: 16px;
   display: inline-block;
   content: '' !important;
-  background: url('https://image.freepik.com/free-icon/adjust-button-with-plus-and-minus_318-76296.png') no-repeat center top;
+  background:  no-repeat center top;
   margin-right: 5px;
   position: relative;
   top: 2px; 
 }
 details[open] > summary:before,
 details.open > summary:before {
-  background: url('../http://media02.hongkiat.com/html5-single-product-page/plus-min.png') no-repeat center bottom;
+  background:  no-repeat center bottom;
 }
 details > summary::-webkit-details-marker { 
   display: inline;
@@ -132,16 +133,7 @@ details > summary::-webkit-details-marker {
 </style>
 </head>
 
-<%
-	int id = Integer.parseInt(request.getParameter("productId"));
-	Product product = new DBProductsDAO().getProductById(id);
-	if(product==null){
-		response.sendRedirect("index.jsp");
-		return;
-	}
-//	print product
 
-%>
 
 <body>
 <div id = "wrapper">
@@ -153,33 +145,35 @@ details > summary::-webkit-details-marker {
  
   <header>
     <hgroup>
-      <h1>ASUS GeForce GTX 750 Ti Graphics Card</h1>
-      <h4>Product code: 098451</h4>
+      <h1><c:out value="${requestScope.product.model}"/></h1>
+      <h4>Product code: <c:out value="${requestScope.product.id}"/></h4>
     </hgroup>
   </header>
  
   <figure>
-    <img src="http://brain-images.cdn.dixons.com/8/7/10001978/u_10001978.jpg"  >
-  <var>Price 200BGN</var>
+    <img src="<c:out value="${requestScope.product.imageUrl}"></c:out>"  >
+  <var>Price <c:out value="${requestScope.product.price}"/>BGN</var>
   </figure>
  
   <section>
- <%=product.toString() %>
-  <p>Enjoy overclocked graphics on your gaming PC with the Asus 2 GB GeForce GTX 750 Ti PCIe Graphics Card. Boasting dual fan cooling, GPU Tweak technology and 3D capabilities, you can expect a lot from this graphics card. It is overclocked for performance that's up to 52 MHz faster than reference so you can get the best from your favourite games.</p>
+ 
+  <p><c:out value="${requestScope.product.info}"/></p>
  
   <details>
    <summary>Product Features</summary>
       <ul>
-        <li>Memory: 2 GB GDDR5</li>
-        <li>CUDA cores: 640</li>
-        <li>Clock speed: 1072 / 1150 MHz</li>
-
-        <li>Memory bandwidth: 128-bit</li>
-        <li>Interface: HDMI / DVI / VGA</li>
+    <c:forEach var="list" items="${requestScope.additionalInfo}">
+        
+		<li><c:out value="${list.key}"/><c:out value="${list.value}"/></li>
+        </c:forEach>
       </ul>
   </details>
- 
-  <button>Add to cart</button>
+<form action="addProduct" method="post">
+<input type="hidden" name="prodID" value="<%=request.getParameter("productId")%>"<%System.out.println("form product"+request.getParameter("productId")); %>>
+<button type="submit">Add to cart</button>
+
+</form>
+  
  
   </section>
  </div></div>
