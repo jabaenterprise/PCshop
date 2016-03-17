@@ -1,0 +1,279 @@
+ CREATE DATABASE IF NOT EXISTS Season5_mashina;
+ CREATE TABLE IF NOT EXISTS Season5_mashina.clients (client_id INT auto_increment, first_name VARCHAR(45) NOT NULL, family_name VARCHAR(45) NOT NULL, email VARCHAR(45) NOT NULL, password VARCHAR(45) NOT NULL, address VARCHAR(100) NOT NULL, phone VARCHAR(45) NOT NULL, money DOUBLE, CONSTRAINT client_id_PK PRIMARY KEY(client_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.product_types (type_id INT auto_increment, type VARCHAR(45) NOT NULL, CONSTRAINT type_id_PK PRIMARY KEY(type_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.products (product_id INT auto_increment, producer VARCHAR(45) NOT NULL, model VARCHAR(45) NOT NULL, price DOUBLE, info MEDIUMTEXT, quantity INT, img_url VARCHAR(100), type_id INT, CONSTRAINT product_id_PK PRIMARY KEY(product_id), CONSTRAINT type_id_FK FOREIGN KEY(type_id) REFERENCES Season5_mashina.product_types(type_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.products_in_carts (client_id INT, product_id INT, quantity_in_cart INT, CONSTRAINT products_in_carts_PK PRIMARY KEY(client_id, product_id), CONSTRAINT client_id_cart_FK FOREIGN KEY(client_id) REFERENCES Season5_mashina.clients(client_id), CONSTRAINT product_id_cart_FK FOREIGN KEY(product_id) REFERENCES Season5_mashina.products(product_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.cases (product_id INT, case_form VARCHAR(45) NOT NULL, case_size VARCHAR(45) NOT NULL, CONSTRAINT product_id_cases_PK PRIMARY KEY(product_id), CONSTRAINT product_id_cases_FK FOREIGN KEY(product_id) REFERENCES Season5_mashina.products(product_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.cpus (product_id INT, number_of_cores INT NOT NULL, clock_speed DOUBLE NOT NULL, cpu_socket VARCHAR(45) NOT NULL, CONSTRAINT product_id_cpus_PK PRIMARY KEY(product_id), CONSTRAINT product_id_cpus_FK FOREIGN KEY(product_id) REFERENCES Season5_mashina.products(product_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.gpus (product_id INT, memory_size INT NOT NULL, max_resolution VARCHAR(45) NOT NULL, output_interface VARCHAR(45) NOT NULL, CONSTRAINT product_id_gpus_PK PRIMARY KEY(product_id), CONSTRAINT product_id_gpus_FK FOREIGN KEY(product_id) REFERENCES Season5_mashina.products(product_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.hard_drives (product_id INT, hd_type VARCHAR(45), size DOUBLE NOT NULL, capacity INT NOT NULL, CONSTRAINT product_id_hds_PK PRIMARY KEY(product_id), CONSTRAINT product_id_hds_FK FOREIGN KEY(product_id) REFERENCES Season5_mashina.products(product_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.monitors (product_id INT, size DOUBLE NOT NULL, refresh_rate INT NOT NULL, matrix_type VARCHAR(45) NOT NULL, CONSTRAINT product_id_mons_PK PRIMARY KEY(product_id), CONSTRAINT product_id_mons_FK FOREIGN KEY(product_id) REFERENCES Season5_mashina.products(product_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.mother_boards (product_id INT, chipset VARCHAR(45) NOT NULL, ram_slots INT NOT NULL, socket VARCHAR(45) NOT NULL, CONSTRAINT product_id_mbs_PK PRIMARY KEY(product_id), CONSTRAINT product_id_mbs_FK FOREIGN KEY(product_id) REFERENCES Season5_mashina.products(product_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.rams (product_id INT, ram_type VARCHAR(45) NOT NULL, size INT NOT NULL, CONSTRAINT product_id_rams_PK PRIMARY KEY(product_id), CONSTRAINT product_id_rams_FK FOREIGN KEY(product_id) REFERENCES Season5_mashina.products(product_id));
+ CREATE TABLE IF NOT EXISTS Season5_mashina.admins (admin_id INT auto_increment, email VARCHAR(45) NOT NULL, password VARCHAR(45) NOT NULL, CONSTRAINT admin_id_PK PRIMARY KEY(admin_id));
+ 
+USE Season5_mashina;
+ 
+INSERT INTO product_types(type) VALUE(\"case\");
+
+INSERT INTO product_types(type) VALUE(\"cpu\");
+
+INSERT INTO product_types(type) VALUE(\"gpu\");
+
+INSERT INTO product_types(type) VALUE(\"hard drive\");
+
+INSERT INTO product_types(type) VALUE(\"monitor\");
+
+INSERT INTO product_types(type) VALUE(\"ram\");
+
+INSERT INTO product_types(type) VALUE(\"mother board\");
+
+
+
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\",\"Obsidian 900D Super Tower Case\", 464, \"
+    Includes three 120mm AF120L and one 140mm AF140L exhaust fan Brushed
+    aluminum front fascia with full cast aluminum surround structure front and rear
+    Five radiator mounting points:
+        Front: up to 360mm
+        Top: up to 480mm (4 x 120) or 420mm (3 x 140)
+        Bottom side one: up to 480mm (4 x 120) or 420mm (3 x 140)
+        Bottom side two (with PSU installed): up to 280mm (2 x 140) or 240mm (2 x 120)
+        Rear: 140mm or 120mm
+    Up to fifteen total fan mount locations
+    Nine tool free 3.5” and screw-in 2.5” combo hard drive bays for maximum storage, upgradable to fifteen total (requires purchasing two additional cages)
+    Four tool-free 5.25” drive bays
+\", 20, \"img/case/900D_Side_Built.png\", 1);
+INSERT INTO cases (product_id, case_form, case_size) VALUES(1,\"Tower\",\"20\\"\");
+
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\",\"Obsidian Series 550D Mid-Tower Quiet Case\", 224, \"
+    Four 5.25” drive bays
+    Six 3.5” hard drive bays with 2.5” compatibility
+    Eight expansion slots
+    Supports most 240mm dual radiators (15mm spacing)
+    Two-year warranty
+    Front I/O panel contains:
+        Two USB 3.0 connectors
+        3.5mm headphone and microphone connector
+        Power and reset switches
+\", 20, \"img/case/550d_hero_down_nomesh.png\", 1);
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(2,\"Tower\",\"20\\"\");
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+VALUES(\"Corsair Components\",\"Obsidian 750D Airflow Edition Full Tower Case\", 224, \"
+    Generous expansion room for building high-performance systems
+    High airflow front mesh design for excellent aircooling performance
+    Full side panel window to view your components
+    Tool-free SSD, Hard Drive, and Optical Drive installation
+    Includes three AF140L fans, with room for up to eight fans
+    Modular drive cage system for highly customizable layouts
+        Two modular drive cages house three 3.5” or 2.5” drives each
+        Four tool-free dedicated SSD cages, sideways mounted
+\", 20, \"img/case/750D_AF_01.png\", 1);
+
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(3,\"Tower\",\"20\\"\");
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\",\"Obsidian Series 450D Mid-Tower PC Case\", 119, \"
+    Radiator and fan compatibility compatibility:
+        Top: 3 x 120mm or 2 x 140mm (360mm radiator)
+        Front: 2 x 140mm or 2 x 120mm (2 x 140mm included) (280mm radiator)
+        Bottom: 2 x 120mm (240mm radiator)
+        Rear: 1 x 120mm (120mm included) (120mm radiator)
+    Two USB 3.0 front panel connectors, plus headphone and microphone
+    Easily accessed front, top, and PSU dust filters
+    Excellent cable routing with rubber grommets for clean builds
+    Maximum CPU Cooler Height: 165mm
+    Maximum GPU Length: 430mm
+\", 20, \"img/case/450D_built_three_quarter_hero_down.png\", 1);
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(4,\"Tower\",\"20\\"\");
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\",\"Obsidian Series 350D Micro ATX PC Case\", 99, \"
+    Brushed Aluminum Front Panel
+    SLI / Cross Fire ready
+    Five Expansion Slots
+    Two 2.5”, two 3.5”, and two 5.25” tool free drive bays.
+    Modular 2.5” SSD cage
+    Front 140mm and rear 120mm cooling fans. Room for up to five fans total.
+\", 20, \"img/case/350D_fans_front.png\", 1);
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(5,\"Tower\",\"20\\"\");
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\",\"Obsidian Series 250D Mini ITX PC Case\", 89, \"
+    Aluminum front fascia and thick steel construction
+    Overall dimensions: 290mm (H) x 277mm (W) x 351mm (D)
+    Top window for component visibility
+    Thumbscrew backplate removal for PSU and hard drive access
+    Easily removed dust filters on all intakes
+    Simultaneously fit two 3.5”/2.5” drives, two 2.5” drives, one 5.25” drive, a full sized PSU, a 290mm long GPU, and a 240mm radiator
+\", 20, \"img/case/250D_back_view.png\", 1);
+
+
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(6,\"Tower\",\"20\\"\");
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\", \"Graphite Series 600T Silver Mid-Tower Case\", 249, \"
+The Graphite Series 600T makes it easy to build a world-class gaming system.
+ With excellent cooling from the dual 200mm fans, eight PCI-E expansion slots
+ to accommodate multiple graphics cards, and plenty of room for large,
+ power-hungry components, the Graphite Series 600T can handle just about
+ anything you can throw at it.
+\", 10, \"img/case/600t_silver_heroclosed.png\", 1);
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(7,\"Tower\",\"20\\"\");
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\", \"Graphite Series 780T White Full-Tower PC Case\", 190, \"
+    Maximum GPU Length: 355mm
+    Maximum CPU Cooler Height: 200mm
+    Maximum PSU Length: 260mm
+    Radiator Mount Locations:
+        Front: 360mm or 280mm
+        Top: 360mm or 280mm
+        Bottom: 240mm
+        Rear: 140mm
+\", 10, \"img/case/780T_White_01.png\", 1);
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(8,\"Tower\",\"20\\"\");
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\", \"Graphite Series 600T Mesh Mid-Tower Case\", 180, \"
+
+The Graphite Series 600T makes it easy to build a world-class gaming system. 
+With excellent cooling from the dual 200mm fans, eight PCI-E expansion slots to
+ accommodate multiple graphics cards, and plenty of room for large, power-hungry
+ components, the Graphite Series 600T can handle just about anything you can throw at it.
+\", 10, \"img/case/600tm_3qtr_up.png\", 1);
+
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(9,\"Tower\",\"20\\"\");
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\", \"Graphite Series 760T Full-Tower Windowed Case\", 180, \"
+    Gorgeous full panel window for maximum visibility of your internal components
+    Hinged side panels with quick release latches for easy access
+    Generous expansion room for building high-performance systems
+    Tool-free SSD, Hard Drive, and Optical Drive installation
+    Includes three AF140L fans, (front fans with red LEDs) with room for up to eight fans
+    Modular drive cage system for highly customizable layouts
+        Two modular drive cages house three 3.5” or 2.5” drives each
+        Four tool-free dedicated SSD cages, sideways mounted
+    Designed for fast and straightforward builds
+\", 10, \"img/case/760T_three_quarter_hero_low_blk.png\", 1);
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(10,\"Tower\",\"20\\"\");
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\", \"Graphite Series 780T Full-Tower PC Case\", 180, \"
+    Maximum GPU Length: 355mm
+    Maximum CPU Cooler Height: 200mm
+    Maximum PSU Length: 260mm
+    Radiator Mount Locations:
+        Front: 360mm or 280mm
+        Top: 360mm or 280mm
+        Bottom: 240mm
+        Rear: 140mm
+\", 10, \"img/case/780T_Black_001.png\", 1);
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(11,\"Tower\",\"20\\"\");
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\", \"Graphite Series 730T Full-Tower Case\", 140, \"
+    Hinged side panels with quick release latches for easy access
+    Generous expansion room for building high-performance systems
+    Tool-free SSD, Hard Drive, and Optical Drive installation
+    Includes three AF140L fans, (front fans with red LEDs) with room for up to eight fans
+    Modular drive cage system for highly customizable layouts
+        Two modular drive cages house three 3.5” or 2.5” drives each
+        Four tool-free dedicated SSD cages, sideways mounted
+    Designed for fast and straightforward builds
+
+\", 10, \"img/case/780T_Black_001.png\", 1);
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(12,\"Tower\",\"20\\"\");
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\", \"Graphite Series 230T Mid-Tower Case\", 79, \"
+    Maximum GPU Length: 355mm
+    Maximum CPU Cooler Height: 200mm
+    Maximum PSU Length: 260mm
+    Radiator Mount Locations:
+        Front: 360mm or 280mm
+        Top: 360mm or 280mm
+        Bottom: 240mm
+        Rear: 140mm
+\", 10, \"img/case/780T_Black_001.png\", 1);
+
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(13,\"Tower\",\"20\\"\");
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\", \"Graphite Series 230T Case Battleship\", 79, \"
+    Maximum GPU Length: 355mm
+    Maximum CPU Cooler Height: 200mm
+    Maximum PSU Length: 260mm
+    Radiator Mount Locations:
+        Front: 360mm or 280mm
+        Top: 360mm or 280mm
+        Bottom: 240mm
+        Rear: 140mm
+\", 10, \"img/case/780T_Black_001.png\", 1);
+
+
+INSERT INTO cases (product_id, case_form, case_size) VALUES(14,\"Tower\",\"20\\"\");
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"Corsair Components\", \"Graphite Series 230T Compact Mid-Tower Case\", 70, \"
+    Maximum GPU Length: 355mm
+    Maximum CPU Cooler Height: 200mm
+    Maximum PSU Length: 260mm
+    Radiator Mount Locations:
+        Front: 360mm or 280mm
+        Top: 360mm or 280mm
+        Bottom: 240mm
+        Rear: 140mm
+\", 10, \"img/case/780T_Black_001.png\", 1);
+INSERT INTO cases (product_id, case_form, case_size) VALUES(15,\"Tower\",\"20\\"\");
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+
+VALUES(\"BenQ\", \"XL2730Z\", 589, \"
+    New standards have been set for the finest, smoothest and fastest gameplay experience. The new XL2730Z gaming monitor incorporates perfect motion, fast gaming features, QHD resolution, 144Hz refresh rate, 1ms GTG response time and VESA Standard Adaptive-Sync technology with the most powerful gaming gear for precise control, intuitive set-up and gaming eye care to empower professional gamers and gaming enthusiasts to dominate every gameplay.
+\", 20, \"img/BenQxl2730z.png\", 5);
+INSERT INTO monitors (product_id, size, refresh_rate, matrix_type) VALUES(16,27,144,\"TN\");
+
+INSERT INTO products(producer, model, price, info, quantity, img_url, type_id)
+VALUES(\"Intel\", \"Core i7-4790K\", 633, \"
+ The Core i7-4790K carries two professional features that the Core i7-4770K lacked. It provides support for Intel's Transactional Synchronization Extensions (TSX) and I/O virtualization (VT-d). VT-d allows a virtual machine to assign specific I/O devices (meaning those hardware mounted physically within the system) to a particular virtual machine. Both of these are specialized features, particularly TSX, which offers programmers the ability to design multithreading applications that scale more effectively than current software—if the CPU supports TSX already. Intel's decision to leave both of these features off of the Intel Core i7-4770K last year drew criticism from enthusiasts who wanted a high-end chip that offered all of Intel's high-end features, but were unable to buy one unless they gave up overclocking support.
+\", 20, \"img/cpu/Intel Core i7-4790K.jpg\", 2);
+
+INSERT INTO cpus (product_id, number_of_cores, clock_speed, cpu_socket) VALUES(17,4,4,\"1150\");
+
+ INSERT INTO admins
+(
+email,
+password)
+VALUES
+(
+\"admin@admin.com\"	,
+\"admin\");
+
+ 
